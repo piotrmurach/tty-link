@@ -11,7 +11,7 @@ module TTY
     BEL = "\u0007"
     SEP = ";"
 
-    ITERM = /iTerm(\s*\d+){0,1}.app/x
+    ITERM = /iTerm(\s*\d+){0,1}.app/x.freeze
 
     # Parse version number
     #
@@ -19,12 +19,12 @@ module TTY
     #
     # @api private
     def parse_version(version)
-      if matches = version.match(/^(\d{1,2})(\d{2})$/)
+      if (matches = version.match(/^(\d{1,2})(\d{2})$/))
         major, minor, patch = 0, matches[1].to_i, matches[2].to_i
       else
         major, minor, patch = version.split(".").map(&:to_i)
       end
-      {major: major, minor: minor, patch: patch}
+      { major: major, minor: minor, patch: patch }
     end
     module_function :parse_version
 
