@@ -4,13 +4,26 @@
 
 # TTY::Link
 
+[![Gem Version](https://badge.fury.io/rb/tty-link.svg)][gem]
+[![Build Status](https://secure.travis-ci.org/piotrmurach/tty-link.svg?branch=master)][travis]
+[![Build status](https://ci.appveyor.com/api/projects/status/4vb3w6wmr9w9vfp7?svg=true)][appveyor]
+[![Maintainability](https://api.codeclimate.com/v1/badges/3f8c368617c464238bf9/maintainability)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
+[![Inline docs](http://inch-ci.org/github/piotrmurach/tty-link.svg?branch=master)][inchpages]
+
+[gitter]: https://gitter.im/piotrmurach/tty
+[gem]: http://badge.fury.io/rb/tty-link
+[travis]: http://travis-ci.org/piotrmurach/tty-link
+[appveyor]: https://ci.appveyor.com/project/piotrmurach/tty-link
+[codeclimate]: https://codeclimate.com/github/piotrmurach/tty-link/maintainability
+[coverage]: https://coveralls.io/github/piotrmurach/tty-link
+[inchpages]: http://inch-ci.org/github/piotrmurach/tty-link
+
 > Hyperlinks in your terminal
 
-**TTY::Link** allows you to test whether a terminal supports hyperlinks and print them to the console.
+**TTY::Link** allows you to test whether a terminal supports hyperlinks and print them to the console. It is a component in [TTY toolkit](https://github.com/piotrmurach/tty)
 
 Terminal emulators such as `iTerm2` or `GNOME`, `XFCE` that use `VTE` widget support web style hyperlinks via `Ctrl+click` or `Cmd+click`.
-
-**TTY::Logger** provides independent logging component for [TTY toolkit](https://github.com/piotrmurach/tty).
 
 ## Installation
 
