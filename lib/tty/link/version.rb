@@ -2,6 +2,6 @@
 
 module TTY
   module Link
-    VERSION = "0.1.0"
+    VERSION = "0.1.1"
   end # Link
 end # TTY
