@@ -27,7 +27,7 @@ RSpec.describe TTY::Link, "#support_link" do
     expect(TTY::Link.support_link?(output: output)).to eq(true)
   end
 
-  it "doesn't support links in iTerm below 3.0.0"  do
+  it "doesn't support links in iTerm below 3.0.0" do
     allow(ENV).to receive(:[]).with("TERM_PROGRAM").and_return("iTerm.app")
     allow(ENV).to receive(:[]).with("TERM_PROGRAM_VERSION").and_return("3.0.0")
 
