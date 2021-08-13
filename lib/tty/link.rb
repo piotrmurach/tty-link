@@ -24,7 +24,7 @@ module TTY
       else
         major, minor, patch = version.split(".").map(&:to_i)
       end
-      { major: major, minor: minor, patch: patch }
+      {major: major, minor: minor, patch: patch}
     end
     module_function :parse_version
 
@@ -47,10 +47,10 @@ module TTY
         version = parse_version(ENV["VTE_VERSION"])
 
         return version[:major] > 0 || version[:minor] > 50 ||
-          version[:minor] == 50 && version[:patch] > 0
+               version[:minor] == 50 && version[:patch] > 0
       end
 
-      return false
+      false
     end
     module_function :support_link?
 
@@ -64,7 +64,7 @@ module TTY
     # @api public
     def link_to(name, url)
       if support_link?
-        [ OSC, "8", SEP, SEP, url, BEL, name, OSC, "8", SEP, SEP, BEL ].join("")
+        [OSC, "8", SEP, SEP, url, BEL, name, OSC, "8", SEP, SEP, BEL].join
       else
         "#{name} -> #{url}"
       end
