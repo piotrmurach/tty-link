@@ -9,15 +9,15 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/4vb3w6wmr9w9vfp7?svg=true)][appveyor]
 [![Maintainability](https://api.codeclimate.com/v1/badges/3f8c368617c464238bf9/maintainability)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
-[![Inline docs](http://inch-ci.org/github/piotrmurach/tty-link.svg?branch=master)][inchpages]
+[![Inline docs](https://inch-ci.org/github/piotrmurach/tty-link.svg?branch=master)][inchpages]
 
 [gitter]: https://gitter.im/piotrmurach/tty
-[gem]: http://badge.fury.io/rb/tty-link
+[gem]: https://badge.fury.io/rb/tty-link
 [gh_actions_ci]: https://github.com/piotrmurach/tty-link/actions?query=workflow%3ACI
 [appveyor]: https://ci.appveyor.com/project/piotrmurach/tty-link
 [codeclimate]: https://codeclimate.com/github/piotrmurach/tty-link/maintainability
 [coverage]: https://coveralls.io/github/piotrmurach/tty-link
-[inchpages]: http://inch-ci.org/github/piotrmurach/tty-link
+[inchpages]: https://inch-ci.org/github/piotrmurach/tty-link
 
 > Hyperlinks in your terminal
 
@@ -65,7 +65,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/piotrmurach/tty-link. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/piotrmurach/tty-link. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/piotrmurach/tty-link/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
