@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
     "rubygems_mfa_required" => "true",
     "source_code_uri"   => "https://github.com/piotrmurach/tty-link"
   }
-  spec.files         = Dir["lib/**/*", "README.md", "CHANGELOG.md", "LICENSE.txt"]
-  spec.extra_rdoc_files = ["README.md", "CHANGELOG.md"]
+  spec.files         = Dir["lib/**/*"]
+  spec.extra_rdoc_files = ["CHANGELOG.md", "LICENSE.txt", "README.md"]
   spec.bindir        = "exe"
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.0.0"
