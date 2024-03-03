@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.version       = TTY::Link::VERSION
   spec.authors       = ["Piotr Murach"]
   spec.email         = ["piotr@piotrmurach.com"]
-  spec.summary       = %q{Hyperlinks in your terminal}
-  spec.description   = %q{Hyperlinks in your terminal}
+  spec.summary       = "Terminal hyperlinks support detection and generation."
+  spec.description   = spec.summary
   spec.homepage      = "https://ttytoolkit.org"
   spec.license       = "MIT"
   spec.metadata = {
