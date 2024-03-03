@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
   }
   spec.files         = Dir["lib/**/*"]
   spec.extra_rdoc_files = ["CHANGELOG.md", "LICENSE.txt", "README.md"]
-  spec.bindir        = "exe"
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.0.0"
 
