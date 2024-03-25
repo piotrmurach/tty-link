@@ -16,6 +16,12 @@ RSpec.describe TTY::Link, "#support_link" do
     end
   end
 
+  describe "unknown terminal" do
+    it "doesn't support links" do
+      expect(described_class.support_link?(output: output)).to eq(false)
+    end
+  end
+
   describe "iTerm" do
     before {
       allow(ENV).to receive(:[]).with("TERM_PROGRAM").and_return("iTerm.app")
