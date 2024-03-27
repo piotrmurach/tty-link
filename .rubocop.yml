@@ -2,46 +2,35 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 2.0
 
-Layout/FirstArrayElementIndentation:
+Gemspec/DevelopmentDependencies:
   Enabled: false
 
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
 Layout/LineLength:
-  Max: 82
+  Max: 80
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
-Metrics/AbcSize:
-  Max: 35
-
 Metrics/BlockLength:
-  CountComments: true
-  Max: 25
-  IgnoredMethods: []
   Exclude:
     - "spec/**/*"
+    - "**/*.gemspec"
 
-Metrics/ClassLength:
-  Max: 1500
-
-Metrics/CyclomaticComplexity:
-  Max: 10
-
-Metrics/MethodLength:
-  Max: 20
+Metrics/ModuleLength:
+  Enabled: false
 
 Metrics/PerceivedComplexity:
-  Max: 10
+  Max: 5
 
 Naming/FileName:
   Exclude:
     - "lib/tty-link.rb"
-
-Style/AccessorGrouping:
-  Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
 
 Style/BlockDelimiters:
   Enabled: false
@@ -49,13 +38,17 @@ Style/BlockDelimiters:
 Style/CommentedKeyword:
   Enabled: false
 
+Style/FetchEnvVar:
+  Enabled: false
+
 Style/LambdaCall:
   EnforcedStyle: braces
 
+Style/ParallelAssignment:
+  Enabled: false
+
 Style/StringLiterals:
-  Enabled: true
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
-  Enabled: true
   EnforcedStyle: double_quotes
