@@ -3,19 +3,64 @@
 require_relative "link/version"
 
 module TTY
+  # Responsible for detecting and generating terminal hyperlinks
+  #
+  # @api public
   module Link
+    # Raised to signal an error condition
+    #
+    # @api public
     class Error < StandardError; end
 
+    # The ANSI escape sequence code
+    #
+    # @return [String]
+    #
+    # @api private
     ESC = "\u001B["
+
+    # The operating system command code
+    #
+    # @return [String]
+    #
+    # @api private
     OSC = "\u001B]"
+
+    # The bell control code
+    #
+    # @return [String]
+    #
+    # @api private
     BEL = "\u0007"
+
+    # The parameters separator
+    #
+    # @return [String]
+    #
+    # @api private
     SEP = ";"
 
+    # The iTerm terminal name pattern
+    #
+    # @return [Regexp]
+    #
+    # @api private
     ITERM = /iTerm(\s*\d+){0,1}.app/x.freeze
 
     # Parse version number
     #
+    # @example
+    #   TTY::Link.parse_version("1234")
+    #   # => {major: 0, minor: 12, patch: 34}
+    #
+    # @example
+    #   TTY::Link.parse_version("1.2.3")
+    #   # => {major: 1, minor: 2, patch: 3}
+    #
     # @param [String] version
+    #   the version to parse
+    #
+    # @return [Hash{Symbol => Integer, nil}]
     #
     # @api private
     def parse_version(version)
@@ -28,7 +73,18 @@ module TTY
     end
     module_function :parse_version
 
-    # Check if link is supported
+    # Detect terminal hyperlink support
+    #
+    # @example
+    #   TTY::Link.support_link?
+    #   # => true
+    #
+    # @example
+    #   TTY::Link.support_link?(output: $stderr)
+    #   # => false
+    #
+    # @param [IO] output
+    #   the output stream, defaults to $stdout
     #
     # @return [Boolean]
     #
@@ -42,7 +98,6 @@ module TTY
         return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
       end
 
-      # uses VTE terminal
       if ENV["VTE_VERSION"]
         version = parse_version(ENV["VTE_VERSION"])
 
@@ -54,10 +109,15 @@ module TTY
     end
     module_function :support_link?
 
-    # Render terminal link
+    # Generate terminal hyperlink
+    #
+    # @example
+    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org")
     #
     # @param [String] name
+    #   the name for the URL
     # @param [String] url
+    #   the URL target
     #
     # @return [String]
     #
