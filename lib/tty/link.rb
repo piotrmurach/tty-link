@@ -13,7 +13,7 @@ module TTY
     # @return [String]
     #
     # @api private
-    OSC = "\u001B]"
+    OSC = "\e]"
 
     # The bell control code
     #
