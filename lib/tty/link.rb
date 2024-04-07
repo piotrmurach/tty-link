@@ -10,7 +10,7 @@ module TTY
     # Raised to signal an error condition
     #
     # @api public
-    class Error < StandardError; end
+    Error = Class.new(StandardError)
 
     # The ANSI escape sequence code
     #
