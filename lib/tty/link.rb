@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "link/errors"
 require_relative "link/version"
 
 module TTY
@@ -7,11 +8,6 @@ module TTY
   #
   # @api public
   module Link
-    # Raised to signal an error condition
-    #
-    # @api public
-    Error = Class.new(StandardError)
-
     # The ANSI escape sequence code
     #
     # @return [String]
