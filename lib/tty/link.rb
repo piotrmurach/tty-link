@@ -8,12 +8,12 @@ module TTY
   #
   # @api public
   module Link
-    # The operating system command code
+    # The hyperlink operating system command code
     #
     # @return [String]
     #
     # @api private
-    OSC = "\e]"
+    OSC8 = "\e]8"
 
     # The bell control code
     #
@@ -113,7 +113,7 @@ module TTY
     # @api public
     def link_to(name, url)
       if support_link?
-        [OSC, "8", SEP, SEP, url, BEL, name, OSC, "8", SEP, SEP, BEL].join
+        [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
         "#{name} -> #{url}"
       end
