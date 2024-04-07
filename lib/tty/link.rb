@@ -27,7 +27,7 @@ module TTY
     # @return [String]
     #
     # @api private
-    BEL = "\u0007"
+    BEL = "\a"
 
     # The parameters separator
     #
