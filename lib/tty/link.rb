@@ -8,13 +8,6 @@ module TTY
   #
   # @api public
   module Link
-    # The ANSI escape sequence code
-    #
-    # @return [String]
-    #
-    # @api private
-    ESC = "\u001B["
-
     # The operating system command code
     #
     # @return [String]
