@@ -7,6 +7,7 @@
 * Change the OSC constant to OSC8 to include the hyperlink control number
 * Change the TTY::Link module to remove the ESC constant
 * Change the TTY::Link module constants to be private
+* Change the TTY::Link module to check the iTerm program version presence
 
 ## [v0.1.1] - 2020-01-25
 
