@@ -69,6 +69,12 @@ RSpec.describe TTY::Link, "#support_link" do
 
       expect(described_class.support_link?(output: output)).to eq(false)
     end
+
+    it "doesn't support links without a version" do
+      allow(ENV).to receive(:[]).with("TERM_PROGRAM_VERSION").and_return(nil)
+
+      expect(described_class.support_link?(output: output)).to eq(false)
+    end
   end
 
   describe "VTE" do

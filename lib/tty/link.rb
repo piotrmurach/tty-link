@@ -81,7 +81,7 @@ module TTY
     def support_link?(output: $stdout)
       return false unless output.tty?
 
-      if ENV["TERM_PROGRAM"] =~ ITERM
+      if ENV["TERM_PROGRAM"] =~ ITERM && ENV["TERM_PROGRAM_VERSION"]
         version = parse_version(ENV["TERM_PROGRAM_VERSION"])
 
         return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
