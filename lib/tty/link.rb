@@ -14,6 +14,7 @@ module TTY
     #
     # @api private
     BEL = "\a"
+    private_constant :BEL
 
     # The iTerm terminal name pattern
     #
@@ -21,6 +22,7 @@ module TTY
     #
     # @api private
     ITERM = /iTerm(\s*\d+){0,1}.app/x.freeze
+    private_constant :ITERM
 
     # The hyperlink operating system command code
     #
@@ -28,6 +30,7 @@ module TTY
     #
     # @api private
     OSC8 = "\e]8"
+    private_constant :OSC8
 
     # The parameters separator
     #
@@ -35,6 +38,7 @@ module TTY
     #
     # @api private
     SEP = ";"
+    private_constant :SEP
 
     # Generate terminal hyperlink
     #
