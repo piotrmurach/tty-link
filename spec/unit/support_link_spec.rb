@@ -27,6 +27,14 @@ RSpec.describe TTY::Link, "#support_link" do
       allow(ENV).to receive(:[]).with("TERM_PROGRAM").and_return("iTerm.app")
     }
 
+    it "supports a terminal program name with a version number" do
+      allow(ENV).to receive(:[]).with("TERM_PROGRAM").and_return("iTerm 2.app")
+      allow(ENV).to receive(:[]).with("TERM_PROGRAM_VERSION")
+                                .and_return("4.3.2")
+
+      expect(described_class.support_link?(output: output)).to eq(true)
+    end
+
     it "supports links above the 4.3.2 version" do
       allow(ENV).to receive(:[]).with("TERM_PROGRAM_VERSION")
                                 .and_return("4.3.2")
