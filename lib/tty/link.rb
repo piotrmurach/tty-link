@@ -8,13 +8,6 @@ module TTY
   #
   # @api public
   module Link
-    # The hyperlink operating system command code
-    #
-    # @return [String]
-    #
-    # @api private
-    OSC8 = "\e]8"
-
     # The bell control code
     #
     # @return [String]
@@ -22,19 +15,26 @@ module TTY
     # @api private
     BEL = "\a"
 
-    # The parameters separator
-    #
-    # @return [String]
-    #
-    # @api private
-    SEP = ";"
-
     # The iTerm terminal name pattern
     #
     # @return [Regexp]
     #
     # @api private
     ITERM = /iTerm(\s*\d+){0,1}.app/x.freeze
+
+    # The hyperlink operating system command code
+    #
+    # @return [String]
+    #
+    # @api private
+    OSC8 = "\e]8"
+
+    # The parameters separator
+    #
+    # @return [String]
+    #
+    # @api private
+    SEP = ";"
 
     # Parse version number
     #
