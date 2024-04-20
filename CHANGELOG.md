@@ -6,6 +6,7 @@
 * Change the BEL and OSC control characters from Unicode to escape code
 * Change the OSC constant to OSC8 to include the hyperlink control number
 * Change the TTY::Link module to remove the ESC constant
+* Change the TTY::Link module constants to be private
 
 ## [v0.1.1] - 2020-01-25
 
