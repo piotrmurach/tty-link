@@ -36,31 +36,27 @@ module TTY
     # @api private
     SEP = ";"
 
-    # Parse version number
+    # Generate terminal hyperlink
     #
     # @example
-    #   TTY::Link.parse_version("1234")
-    #   # => {major: 0, minor: 12, patch: 34}
+    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org")
     #
-    # @example
-    #   TTY::Link.parse_version("1.2.3")
-    #   # => {major: 1, minor: 2, patch: 3}
+    # @param [String] name
+    #   the name for the URL
+    # @param [String] url
+    #   the URL target
     #
-    # @param [String] version
-    #   the version to parse
+    # @return [String]
     #
-    # @return [Hash{Symbol => Integer, nil}]
-    #
-    # @api private
-    def parse_version(version)
-      if (matches = version.match(/^(\d{1,2})(\d{2})$/))
-        major, minor, patch = 0, matches[1].to_i, matches[2].to_i
+    # @api public
+    def link_to(name, url)
+      if support_link?
+        [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
-        major, minor, patch = version.split(".").map(&:to_i)
+        "#{name} -> #{url}"
       end
-      {major: major, minor: minor, patch: patch}
     end
-    module_function :parse_version
+    module_function :link_to
 
     # Detect terminal hyperlink support
     #
@@ -98,26 +94,30 @@ module TTY
     end
     module_function :support_link?
 
-    # Generate terminal hyperlink
+    # Parse version number
     #
     # @example
-    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+    #   TTY::Link.parse_version("1234")
+    #   # => {major: 0, minor: 12, patch: 34}
     #
-    # @param [String] name
-    #   the name for the URL
-    # @param [String] url
-    #   the URL target
+    # @example
+    #   TTY::Link.parse_version("1.2.3")
+    #   # => {major: 1, minor: 2, patch: 3}
     #
-    # @return [String]
+    # @param [String] version
+    #   the version to parse
     #
-    # @api public
-    def link_to(name, url)
-      if support_link?
-        [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
+    # @return [Hash{Symbol => Integer, nil}]
+    #
+    # @api private
+    def parse_version(version)
+      if (matches = version.match(/^(\d{1,2})(\d{2})$/))
+        major, minor, patch = 0, matches[1].to_i, matches[2].to_i
       else
-        "#{name} -> #{url}"
+        major, minor, patch = version.split(".").map(&:to_i)
       end
+      {major: major, minor: minor, patch: patch}
     end
-    module_function :link_to
+    module_function :parse_version
   end # Link
 end # TTY
