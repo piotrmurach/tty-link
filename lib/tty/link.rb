@@ -40,6 +40,14 @@ module TTY
     SEP = ";"
     private_constant :SEP
 
+    # The term program environment variable name
+    #
+    # @return [String]
+    #
+    # @api private
+    TERM_PROGRAM = "TERM_PROGRAM"
+    private_constant :TERM_PROGRAM
+
     # Generate terminal hyperlink
     #
     # @example
@@ -81,7 +89,7 @@ module TTY
     def support_link?(output: $stdout)
       return false unless output.tty?
 
-      if ENV["TERM_PROGRAM"] =~ ITERM && ENV["TERM_PROGRAM_VERSION"]
+      if ENV[TERM_PROGRAM] =~ ITERM && ENV["TERM_PROGRAM_VERSION"]
         version = parse_version(ENV["TERM_PROGRAM_VERSION"])
 
         return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
