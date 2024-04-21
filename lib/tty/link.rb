@@ -56,6 +56,14 @@ module TTY
     TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
     private_constant :TERM_PROGRAM_VERSION
 
+    # The VTE version environment variable name
+    #
+    # @return [String]
+    #
+    # @api private
+    VTE_VERSION = "VTE_VERSION"
+    private_constant :VTE_VERSION
+
     # Generate terminal hyperlink
     #
     # @example
@@ -103,8 +111,8 @@ module TTY
         return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
       end
 
-      if ENV["VTE_VERSION"]
-        version = parse_version(ENV["VTE_VERSION"])
+      if ENV[VTE_VERSION]
+        version = parse_version(ENV[VTE_VERSION])
 
         return version[:major] > 0 || version[:minor] > 50 ||
                version[:minor] == 50 && version[:patch] > 0
