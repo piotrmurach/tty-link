@@ -8,12 +8,12 @@ RSpec.describe TTY::Link, "#parse_version" do
     {from: "1030", to: {major: 0, minor: 10, patch: 30}},
     {from: "12.34.56", to: {major: 12, minor: 34, patch: 56}},
     {from: "0.1.2", to: {major: 0, minor: 1, patch: 2}},
-    {from: "1.0.", to: {major: 1, minor: 0, patch: nil}},
-    {from: "1.0", to: {major: 1, minor: 0, patch: nil}},
-    {from: "1.", to: {major: 1, minor: nil, patch: nil}},
-    {from: "12", to: {major: 12, minor: nil, patch: nil}},
-    {from: "1", to: {major: 1, minor: nil, patch: nil}},
-    {from: "", to: {major: nil, minor: nil, patch: nil}}
+    {from: "1.0.", to: {major: 1, minor: 0, patch: 0}},
+    {from: "1.0", to: {major: 1, minor: 0, patch: 0}},
+    {from: "1.", to: {major: 1, minor: 0, patch: 0}},
+    {from: "12", to: {major: 12, minor: 0, patch: 0}},
+    {from: "1", to: {major: 1, minor: 0, patch: 0}},
+    {from: "", to: {major: 0, minor: 0, patch: 0}}
   ].each do |data|
     it "parses #{data[:from].inspect} to #{data[:to]}" do
       expect(described_class.parse_version(data[:from])).to eq(data[:to])

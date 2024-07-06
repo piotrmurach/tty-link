@@ -157,16 +157,16 @@ module TTY
     # @param [String] separator
     #   the version separator
     #
-    # @return [Hash{Symbol => Integer, nil}]
+    # @return [Hash{Symbol => Integer}]
     #
     # @api private
     def parse_version(version, separator: VERSION_SEPARATOR)
       if (matches = version.match(UNSEPARATED_VERSION_PATTERN))
-        major, minor, patch = 0, matches[1].to_i, matches[2].to_i
+        major, minor, patch = 0, matches[1], matches[2]
       else
-        major, minor, patch = version.split(separator).map(&:to_i)
+        major, minor, patch = version.split(separator)
       end
-      {major: major, minor: minor, patch: patch}
+      {major: major.to_i, minor: minor.to_i, patch: patch.to_i}
     end
     module_function :parse_version
   end # Link
