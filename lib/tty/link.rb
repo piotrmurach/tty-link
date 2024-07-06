@@ -56,6 +56,14 @@ module TTY
     TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
     private_constant :TERM_PROGRAM_VERSION
 
+    # The unseparated version pattern
+    #
+    # @return [Regexp]
+    #
+    # @api private
+    UNSEPARATED_VERSION_PATTERN = /^(\d{1,2})(\d{2})$/.freeze
+    private_constant :UNSEPARATED_VERSION_PATTERN
+
     # The VTE version environment variable name
     #
     # @return [String]
@@ -139,7 +147,7 @@ module TTY
     #
     # @api private
     def parse_version(version)
-      if (matches = version.match(/^(\d{1,2})(\d{2})$/))
+      if (matches = version.match(UNSEPARATED_VERSION_PATTERN))
         major, minor, patch = 0, matches[1].to_i, matches[2].to_i
       else
         major, minor, patch = version.split(".").map(&:to_i)
