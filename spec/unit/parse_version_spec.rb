@@ -19,4 +19,9 @@ RSpec.describe TTY::Link, "#parse_version" do
       expect(described_class.parse_version(data[:from])).to eq(data[:to])
     end
   end
+
+  it "parses the 1-2-3 version with a custom separator" do
+    parsed_version = described_class.parse_version("1-2-3", separator: "-")
+    expect(parsed_version).to eq({major: 1, minor: 2, patch: 3})
+  end
 end

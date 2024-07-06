@@ -148,17 +148,23 @@ module TTY
     #   TTY::Link.parse_version("1.2.3")
     #   # => {major: 1, minor: 2, patch: 3}
     #
+    # @example
+    #   TTY::Link.parse_version("1-2-3", separator: "-")
+    #   # => {major: 1, minor: 2, patch: 3}
+    #
     # @param [String] version
     #   the version to parse
+    # @param [String] separator
+    #   the version separator
     #
     # @return [Hash{Symbol => Integer, nil}]
     #
     # @api private
-    def parse_version(version)
+    def parse_version(version, separator: VERSION_SEPARATOR)
       if (matches = version.match(UNSEPARATED_VERSION_PATTERN))
         major, minor, patch = 0, matches[1].to_i, matches[2].to_i
       else
-        major, minor, patch = version.split(VERSION_SEPARATOR).map(&:to_i)
+        major, minor, patch = version.split(separator).map(&:to_i)
       end
       {major: major, minor: minor, patch: patch}
     end
