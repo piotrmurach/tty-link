@@ -4,6 +4,7 @@
 
 ### Added
 * Add the ability to configure the output stream to the link_to method
+* Add the ability to configure environment variables to the support_link method
 
 ### Changed
 * Change the BEL and OSC control characters from Unicode to escape code
