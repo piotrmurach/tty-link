@@ -87,20 +87,26 @@ module TTY
     #
     # @example
     #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
+    #                     env: {"VTE_VERSION" => "7603"})
+    #
+    # @example
+    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
     #                     output: $stderr)
     #
     # @param [String] name
     #   the name for the URL
     # @param [String] url
     #   the URL target
+    # @param [ENV, Hash{String => String}] env
+    #   the environment variables
     # @param [IO] output
     #   the output stream, defaults to $stdout
     #
     # @return [String]
     #
     # @api public
-    def link_to(name, url, output: $stdout)
-      if support_link?(output: output)
+    def link_to(name, url, env: ENV, output: $stdout)
+      if support_link?(env: env, output: output)
         [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
         "#{name} -> #{url}"
