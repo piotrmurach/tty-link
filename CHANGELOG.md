@@ -2,6 +2,9 @@
 
 ## [v0.2.0] - unreleased
 
+### Added
+* Add the ability to configure the output stream to the link_to method
+
 ### Changed
 * Change the BEL and OSC control characters from Unicode to escape code
 * Change the OSC constant to OSC8 to include the hyperlink control number
