@@ -115,26 +115,32 @@ module TTY
     #   # => true
     #
     # @example
+    #   TTY::Link.support_link?(env: {"VTE_VERSION" => "7603"})
+    #   # => true
+    #
+    # @example
     #   TTY::Link.support_link?(output: $stderr)
     #   # => false
     #
+    # @param [ENV, Hash{String => String}] env
+    #   the environment variables
     # @param [IO] output
     #   the output stream, defaults to $stdout
     #
     # @return [Boolean]
     #
     # @api public
-    def support_link?(output: $stdout)
+    def support_link?(env: ENV, output: $stdout)
       return false unless output.tty?
 
-      if ENV[TERM_PROGRAM] =~ ITERM && ENV[TERM_PROGRAM_VERSION]
-        version = parse_version(ENV[TERM_PROGRAM_VERSION])
+      if env[TERM_PROGRAM] =~ ITERM && env[TERM_PROGRAM_VERSION]
+        version = parse_version(env[TERM_PROGRAM_VERSION])
 
         return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
       end
 
-      if ENV[VTE_VERSION]
-        version = parse_version(ENV[VTE_VERSION])
+      if env[VTE_VERSION]
+        version = parse_version(env[VTE_VERSION])
 
         return version[:major] > 0 || version[:minor] > 50 ||
                version[:minor] == 50 && version[:patch] > 0
