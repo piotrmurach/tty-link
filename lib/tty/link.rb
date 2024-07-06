@@ -64,6 +64,14 @@ module TTY
     UNSEPARATED_VERSION_PATTERN = /^(\d{1,2})(\d{2})$/.freeze
     private_constant :UNSEPARATED_VERSION_PATTERN
 
+    # The version separator
+    #
+    # @return [String]
+    #
+    # @api private
+    VERSION_SEPARATOR = "."
+    private_constant :VERSION_SEPARATOR
+
     # The VTE version environment variable name
     #
     # @return [String]
@@ -150,7 +158,7 @@ module TTY
       if (matches = version.match(UNSEPARATED_VERSION_PATTERN))
         major, minor, patch = 0, matches[1].to_i, matches[2].to_i
       else
-        major, minor, patch = version.split(".").map(&:to_i)
+        major, minor, patch = version.split(VERSION_SEPARATOR).map(&:to_i)
       end
       {major: major, minor: minor, patch: patch}
     end
