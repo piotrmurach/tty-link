@@ -85,16 +85,22 @@ module TTY
     # @example
     #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org")
     #
+    # @example
+    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
+    #                     output: $stderr)
+    #
     # @param [String] name
     #   the name for the URL
     # @param [String] url
     #   the URL target
+    # @param [IO] output
+    #   the output stream, defaults to $stdout
     #
     # @return [String]
     #
     # @api public
-    def link_to(name, url)
-      if support_link?
+    def link_to(name, url, output: $stdout)
+      if support_link?(output: output)
         [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
         "#{name} -> #{url}"
