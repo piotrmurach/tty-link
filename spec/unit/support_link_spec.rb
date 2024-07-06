@@ -78,32 +78,32 @@ RSpec.describe TTY::Link, "#support_link" do
   end
 
   describe "VTE" do
-    it "supports links above the 1.0.0 version" do
-      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("1.0.0")
+    it "supports links above the 0.76.3 version" do
+      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("7603")
 
       expect(described_class.support_link?(output: output)).to eq(true)
     end
 
     it "supports links above the 0.51.0 version" do
-      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("0.51.0")
+      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("5100")
 
       expect(described_class.support_link?(output: output)).to eq(true)
     end
 
     it "supports links above the 0.50.1 version" do
-      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("0.50.1")
+      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("5001")
 
       expect(described_class.support_link?(output: output)).to eq(true)
     end
 
     it "doesn't support links on the 0.50.0 version" do
-      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("0.50.0")
+      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("5000")
 
       expect(described_class.support_link?(output: output)).to eq(false)
     end
 
     it "doesn't support links below the 0.50.0 version" do
-      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("0.49.0")
+      allow(ENV).to receive(:[]).with("VTE_VERSION").and_return("4999")
 
       expect(described_class.support_link?(output: output)).to eq(false)
     end
