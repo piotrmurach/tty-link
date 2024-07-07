@@ -5,7 +5,7 @@
 ### Added
 * Add the ability to configure the environment variables and output stream
   to the link_to method
-* Add the ability to configure environment variables to the support_link method
+* Add the ability to configure environment variables to the link? method
 
 ### Changed
 * Change the BEL and OSC control characters from Unicode to escape code
@@ -13,6 +13,7 @@
 * Change the TTY::Link module to remove the ESC constant
 * Change the TTY::Link module constants to be private
 * Change the TTY::Link module to check the iTerm program version presence
+* Change the support_link? method to rename to link?
 
 ## [v0.1.1] - 2020-01-25
 
