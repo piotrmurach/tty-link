@@ -106,7 +106,7 @@ module TTY
     #
     # @api public
     def link_to(name, url, env: ENV, output: $stdout)
-      if support_link?(env: env, output: output)
+      if link?(env: env, output: output)
         [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
         "#{name} -> #{url}"
@@ -117,15 +117,15 @@ module TTY
     # Detect terminal hyperlink support
     #
     # @example
-    #   TTY::Link.support_link?
+    #   TTY::Link.link?
     #   # => true
     #
     # @example
-    #   TTY::Link.support_link?(env: {"VTE_VERSION" => "7603"})
+    #   TTY::Link.link?(env: {"VTE_VERSION" => "7603"})
     #   # => true
     #
     # @example
-    #   TTY::Link.support_link?(output: $stderr)
+    #   TTY::Link.link?(output: $stderr)
     #   # => false
     #
     # @param [ENV, Hash{String => String}] env
@@ -136,7 +136,7 @@ module TTY
     # @return [Boolean]
     #
     # @api public
-    def support_link?(env: ENV, output: $stdout)
+    def link?(env: ENV, output: $stdout)
       return false unless output.tty?
 
       if env[TERM_PROGRAM] =~ ITERM && env[TERM_PROGRAM_VERSION]
@@ -154,7 +154,7 @@ module TTY
 
       false
     end
-    module_function :support_link?
+    module_function :link?
 
     # Parse version number
     #

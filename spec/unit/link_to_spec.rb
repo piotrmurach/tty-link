@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe TTY::Link, "#link_to" do
+RSpec.describe TTY::Link, ".link_to" do
   let(:output) { double(:output, tty?: true) }
 
   it "creates a terminal link" do
-    allow(described_class).to receive(:support_link?)
+    allow(described_class).to receive(:link?)
       .with(env: {}, output: output).and_return(true)
 
     link = described_class.link_to("TTY Toolkit", "https://ttytoolkit.org",
@@ -14,7 +14,7 @@ RSpec.describe TTY::Link, "#link_to" do
   end
 
   it "fails to create a terminal link" do
-    allow(described_class).to receive(:support_link?)
+    allow(described_class).to receive(:link?)
       .with(env: {}, output: output).and_return(false)
 
     link = described_class.link_to("TTY Toolkit", "https://ttytoolkit.org",
