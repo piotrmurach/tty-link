@@ -1,25 +1,55 @@
 # frozen_string_literal: true
 
-RSpec.describe TTY::Link, ".link_to" do
+RSpec.describe TTY::Link do
+  let(:env) {
+    {
+      "TERM_PROGRAM" => "iTerm.app",
+      "TERM_PROGRAM_VERSION" => "4.3.2"
+    }
+  }
   let(:output) { double(:output, tty?: true) }
 
-  it "creates a terminal link" do
-    allow(described_class).to receive(:link?)
-      .with(env: {}, output: output).and_return(true)
+  describe ".link_to" do
+    context "when unsupported terminal" do
+      it "fails to create a terminal link" do
+        linked = described_class.link_to(
+          "TTY Toolkit", "https://ttytoolkit.org", env: {}, output: output
+        )
 
-    link = described_class.link_to("TTY Toolkit", "https://ttytoolkit.org",
-                                   env: {}, output: output)
+        expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+      end
+    end
 
-    expect(link).to eql("\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a")
+    context "when supported terminal" do
+      it "creates a terminal link" do
+        linked = described_class.link_to(
+          "TTY Toolkit", "https://ttytoolkit.org", env: env, output: output
+        )
+
+        expect(linked)
+          .to eql("\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a")
+      end
+    end
   end
 
-  it "fails to create a terminal link" do
-    allow(described_class).to receive(:link?)
-      .with(env: {}, output: output).and_return(false)
+  describe "#link_to" do
+    context "when unsupported terminal" do
+      it "fails to create a terminal link" do
+        link = described_class.new(env: {}, output: output)
+        linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
 
-    link = described_class.link_to("TTY Toolkit", "https://ttytoolkit.org",
-                                   env: {}, output: output)
+        expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+      end
+    end
 
-    expect(link).to eql("TTY Toolkit -> https://ttytoolkit.org")
+    context "when supported terminal" do
+      it "creates a terminal link" do
+        link = described_class.new(env: env, output: output)
+        linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+        expect(linked)
+          .to eql("\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a")
+      end
+    end
   end
 end

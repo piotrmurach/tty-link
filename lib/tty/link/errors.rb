@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TTY
-  module Link
+  class Link
     # Raised to signal an error condition
     #
     # @api public

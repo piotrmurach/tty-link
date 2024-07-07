@@ -7,7 +7,7 @@ module TTY
   # Responsible for detecting and generating terminal hyperlinks
   #
   # @api public
-  module Link
+  class Link
     # The bell control code
     #
     # @return [String]
@@ -104,15 +104,12 @@ module TTY
     #
     # @return [String]
     #
+    # @see #link_to
+    #
     # @api public
-    def link_to(name, url, env: ENV, output: $stdout)
-      if link?(env: env, output: output)
-        [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
-      else
-        "#{name} -> #{url}"
-      end
+    def self.link_to(name, url, env: ENV, output: $stdout)
+      new(env: env, output: output).link_to(name, url)
     end
-    module_function :link_to
 
     # Detect terminal hyperlink support
     #
@@ -135,18 +132,76 @@ module TTY
     #
     # @return [Boolean]
     #
+    # @see #link?
+    #
     # @api public
-    def link?(env: ENV, output: $stdout)
-      return false unless output.tty?
+    def self.link?(env: ENV, output: $stdout)
+      new(env: env, output: output).link?
+    end
 
-      if env[TERM_PROGRAM] =~ ITERM && env[TERM_PROGRAM_VERSION]
-        version = parse_version(env[TERM_PROGRAM_VERSION])
+    # Create a TTY::Link instance
+    #
+    # @example
+    #   link = TTY::Link.new
+    #
+    # @example
+    #   link = TTY::Link.new(env: {"VTE_VERSION" => "7603"})
+    #
+    # @example
+    #   link = TTY::Link.new(output: $stderr)
+    #
+    # @param [ENV, Hash{String => String}] env
+    #   the environment variables
+    # @param [IO] output
+    #   the output stream, defaults to $stdout
+    #
+    # @api public
+    def initialize(env: ENV, output: $stdout)
+      @env = env
+      @output = output
+    end
+
+    # Generate terminal hyperlink
+    #
+    # @example
+    #   link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+    #
+    # @param [String] name
+    #   the name for the URL
+    # @param [String] url
+    #   the URL target
+    #
+    # @return [String]
+    #
+    # @api public
+    def link_to(name, url)
+      if link?
+        [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
+      else
+        "#{name} -> #{url}"
+      end
+    end
+
+    # Detect terminal hyperlink support
+    #
+    # @example
+    #   link.link?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def link?
+      return false unless @output.tty?
+
+      if @env[TERM_PROGRAM] =~ ITERM && @env[TERM_PROGRAM_VERSION]
+        version = parse_version(@env[TERM_PROGRAM_VERSION])
 
         return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
       end
 
-      if env[VTE_VERSION]
-        version = parse_version(env[VTE_VERSION])
+      if @env[VTE_VERSION]
+        version = parse_version(@env[VTE_VERSION])
 
         return version[:major] > 0 || version[:minor] > 50 ||
                version[:minor] == 50 && version[:patch] > 0
@@ -154,7 +209,6 @@ module TTY
 
       false
     end
-    module_function :link?
 
     # Parse version number
     #
@@ -186,6 +240,5 @@ module TTY
       end
       {major: major.to_i, minor: minor.to_i, patch: patch.to_i}
     end
-    module_function :parse_version
   end # Link
 end # TTY
