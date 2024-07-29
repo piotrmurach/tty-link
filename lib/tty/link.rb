@@ -57,22 +57,6 @@ module TTY
     TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
     private_constant :TERM_PROGRAM_VERSION
 
-    # The unseparated version pattern
-    #
-    # @return [Regexp]
-    #
-    # @api private
-    UNSEPARATED_VERSION_PATTERN = /^(\d{1,2})(\d{2})$/.freeze
-    private_constant :UNSEPARATED_VERSION_PATTERN
-
-    # The version separator
-    #
-    # @return [String]
-    #
-    # @api private
-    VERSION_SEPARATOR = "."
-    private_constant :VERSION_SEPARATOR
-
     # The VTE version environment variable name
     #
     # @return [String]
@@ -140,7 +124,7 @@ module TTY
       new(env: env, output: output).link?
     end
 
-    # Create a TTY::Link instance
+    # Create a {TTY::Link} instance
     #
     # @example
     #   link = TTY::Link.new
@@ -160,6 +144,7 @@ module TTY
     def initialize(env: ENV, output: $stdout)
       @env = env
       @output = output
+      @semantic_version = SemanticVersion
     end
 
     # Generate terminal hyperlink
@@ -196,50 +181,44 @@ module TTY
       return false unless @output.tty?
 
       if @env[TERM_PROGRAM] =~ ITERM && @env[TERM_PROGRAM_VERSION]
-        version = parse_version(@env[TERM_PROGRAM_VERSION])
+        current_semantic_version = semantic_version(@env[TERM_PROGRAM_VERSION])
 
-        return version[:major] > 3 || version[:major] == 3 && version[:minor] > 0
+        return current_semantic_version >= semantic_version(3, 1, 0)
       end
 
       if @env[VTE_VERSION]
-        version = parse_version(@env[VTE_VERSION])
+        current_semantic_version = semantic_version(@env[VTE_VERSION])
 
-        return version[:major] > 0 || version[:minor] > 50 ||
-               version[:minor] == 50 && version[:patch] > 0
+        return current_semantic_version >= semantic_version(0, 50, 1)
       end
 
       false
     end
 
-    # Parse version number
+    private
+
+    # Create a {TTY::Link::SemanticVersion} instance from a version value
     #
     # @example
-    #   TTY::Link.parse_version("1234")
-    #   # => {major: 0, minor: 12, patch: 34}
+    #   link.semantic_version(1, 2, 3)
     #
     # @example
-    #   TTY::Link.parse_version("1.2.3")
-    #   # => {major: 1, minor: 2, patch: 3}
+    #   link.semantic_version("1.2.3")
     #
-    # @example
-    #   TTY::Link.parse_version("1-2-3", separator: "-")
-    #   # => {major: 1, minor: 2, patch: 3}
-    #
-    # @param [String] version
-    #   the version to parse
-    # @param [String] separator
+    # @param [Array<Integer, String>] version
+    #   the version to convert to a semantic version
+    # @param [Hash{Symbol => String}] options
+    #   the options to convert to a semantic version
+    # @option options [String] :separator
     #   the version separator
     #
-    # @return [Hash{Symbol => Integer}]
+    # @return [TTY::Link::SemanticVersion]
+    #
+    # @see SemanticVersion#from
     #
     # @api private
-    def parse_version(version, separator: VERSION_SEPARATOR)
-      if (matches = version.match(UNSEPARATED_VERSION_PATTERN))
-        major, minor, patch = 0, matches[1], matches[2]
-      else
-        major, minor, patch = version.split(separator)
-      end
-      {major: major.to_i, minor: minor.to_i, patch: patch.to_i}
+    def semantic_version(*version, **options)
+      @semantic_version.from(*version, **options)
     end
   end # Link
 end # TTY
