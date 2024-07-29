@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "link/errors"
+require_relative "link/semantic_version"
 require_relative "link/version"
 
 module TTY
