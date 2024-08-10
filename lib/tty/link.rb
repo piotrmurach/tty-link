@@ -178,7 +178,7 @@ module TTY
     #
     # @api public
     def link?
-      return false unless @output.tty?
+      return false unless tty?
 
       if @env[TERM_PROGRAM] =~ ITERM && @env[TERM_PROGRAM_VERSION]
         current_semantic_version = semantic_version(@env[TERM_PROGRAM_VERSION])
@@ -196,6 +196,19 @@ module TTY
     end
 
     private
+
+    # Detect the terminal device
+    #
+    # @example
+    #   link.tty?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def tty?
+      @output.tty?
+    end
 
     # Create a {TTY::Link::SemanticVersion} instance from a version value
     #
