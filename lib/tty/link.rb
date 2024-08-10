@@ -186,8 +186,8 @@ module TTY
         return current_semantic_version >= semantic_version(3, 1, 0)
       end
 
-      if @env[VTE_VERSION]
-        current_semantic_version = semantic_version(@env[VTE_VERSION])
+      if vte_version
+        current_semantic_version = semantic_version(vte_version)
 
         return current_semantic_version >= semantic_version(0, 50, 1)
       end
@@ -271,6 +271,19 @@ module TTY
     # @api private
     def term_program_version
       @env[TERM_PROGRAM_VERSION]
+    end
+
+    # Read the VTE version environment variable
+    #
+    # @example
+    #   link.vte_version
+    #   # => "5100"
+    #
+    # @return [String, nil]
+    #
+    # @api private
+    def vte_version
+      @env[VTE_VERSION]
     end
   end # Link
 end # TTY
