@@ -180,7 +180,7 @@ module TTY
     def link?
       return false unless tty?
 
-      if term_program =~ ITERM && @env[TERM_PROGRAM_VERSION]
+      if iterm? && @env[TERM_PROGRAM_VERSION]
         current_semantic_version = semantic_version(@env[TERM_PROGRAM_VERSION])
 
         return current_semantic_version >= semantic_version(3, 1, 0)
@@ -196,6 +196,19 @@ module TTY
     end
 
     private
+
+    # Detect iTerm terminal
+    #
+    # @example
+    #   link.iterm?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def iterm?
+      !(term_program =~ ITERM).nil?
+    end
 
     # Detect the terminal device
     #
