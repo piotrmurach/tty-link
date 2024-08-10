@@ -180,8 +180,8 @@ module TTY
     def link?
       return false unless tty?
 
-      if iterm? && @env[TERM_PROGRAM_VERSION]
-        current_semantic_version = semantic_version(@env[TERM_PROGRAM_VERSION])
+      if iterm? && term_program_version
+        current_semantic_version = semantic_version(term_program_version)
 
         return current_semantic_version >= semantic_version(3, 1, 0)
       end
@@ -258,6 +258,19 @@ module TTY
     # @api private
     def term_program
       @env[TERM_PROGRAM]
+    end
+
+    # Read the term program version environment variable
+    #
+    # @example
+    #   link.term_program_version
+    #   # => "1.2.3"
+    #
+    # @return [String, nil]
+    #
+    # @api private
+    def term_program_version
+      @env[TERM_PROGRAM_VERSION]
     end
   end # Link
 end # TTY
