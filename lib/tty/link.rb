@@ -186,7 +186,7 @@ module TTY
         return current_semantic_version >= semantic_version(3, 1, 0)
       end
 
-      if vte_version
+      if vte?
         current_semantic_version = semantic_version(vte_version)
 
         return current_semantic_version >= semantic_version(0, 50, 1)
@@ -221,6 +221,19 @@ module TTY
     # @api private
     def tty?
       @output.tty?
+    end
+
+    # Detect VTE terminal
+    #
+    # @example
+    #   link.vte?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def vte?
+      !vte_version.nil?
     end
 
     # Create a {TTY::Link::SemanticVersion} instance from a version value
