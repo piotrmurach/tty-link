@@ -182,11 +182,7 @@ module TTY
 
       return iterm_version? if iterm? && term_program_version
 
-      if vte?
-        current_semantic_version = semantic_version(vte_version)
-
-        return current_semantic_version >= semantic_version(0, 50, 1)
-      end
+      return vte_version? if vte?
 
       false
     end
@@ -245,6 +241,21 @@ module TTY
     # @api private
     def vte?
       !vte_version.nil?
+    end
+
+    # Detect whether the VTE version supports terminal hyperlinks
+    #
+    # @example
+    #   link.vte_version?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def vte_version?
+      current_semantic_version = semantic_version(vte_version)
+
+      current_semantic_version >= semantic_version(0, 50, 1)
     end
 
     # Create a {TTY::Link::SemanticVersion} instance from a version value
