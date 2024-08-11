@@ -3,6 +3,7 @@
 require_relative "link/errors"
 require_relative "link/semantic_version"
 require_relative "link/terminals/iterm"
+require_relative "link/terminals/vte"
 require_relative "link/version"
 
 module TTY
