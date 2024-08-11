@@ -58,46 +58,11 @@ RSpec.describe TTY::Link do
     end
 
     context "when VTE" do
-      it "supports links above the 0.76.3 version" do
-        env = {"VTE_VERSION" => "7603"}
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(true)
-      end
-
-      it "supports links above the 0.51.0 version" do
-        env = {"VTE_VERSION" => "5100"}
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(true)
-      end
-
       it "supports links above the 0.50.1 version" do
         env = {"VTE_VERSION" => "5001"}
         link = described_class.new(env: env, output: output)
 
         expect(link.link?).to eq(true)
-      end
-
-      it "doesn't support links on the 0.50.0 version" do
-        env = {"VTE_VERSION" => "5000"}
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(false)
-      end
-
-      it "doesn't support links below the 0.50.0 version" do
-        env = {"VTE_VERSION" => "4999"}
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(false)
-      end
-
-      it "doesn't support links without a version" do
-        env = {"VTE_VERSION" => nil}
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(false)
       end
     end
   end

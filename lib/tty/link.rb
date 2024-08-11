@@ -35,14 +35,6 @@ module TTY
     SEP = ";"
     private_constant :SEP
 
-    # The VTE version environment variable name
-    #
-    # @return [String]
-    #
-    # @api private
-    VTE_VERSION = "VTE_VERSION"
-    private_constant :VTE_VERSION
-
     # Generate terminal hyperlink
     #
     # @example
@@ -123,7 +115,6 @@ module TTY
       @env = env
       @output = output
       @semantic_version = SemanticVersion
-      @iterm = Terminals::Iterm.new(@semantic_version, @env)
     end
 
     # Generate terminal hyperlink
@@ -159,14 +150,25 @@ module TTY
     def link?
       return false unless tty?
 
-      return true if @iterm.link?
-
-      return vte_version? if vte?
-
-      false
+      terminals.any?(&:link?)
     end
 
     private
+
+    # Terminals for detecting hyperlink support
+    #
+    # @example
+    #   link.terminals
+    #
+    # @return [Array(TTY::Link::Terminals::Iterm, TTY::Link::Terminals::Vte)]
+    #
+    # @api private
+    def terminals
+      @terminals ||= [
+        Terminals::Iterm.new(@semantic_version, @env),
+        Terminals::Vte.new(@semantic_version, @env)
+      ]
+    end
 
     # Detect the terminal device
     #
@@ -179,71 +181,6 @@ module TTY
     # @api private
     def tty?
       @output.tty?
-    end
-
-    # Detect VTE terminal
-    #
-    # @example
-    #   link.vte?
-    #   # => true
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def vte?
-      !vte_version.nil?
-    end
-
-    # Detect whether the VTE version supports terminal hyperlinks
-    #
-    # @example
-    #   link.vte_version?
-    #   # => true
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def vte_version?
-      current_semantic_version = semantic_version(vte_version)
-
-      current_semantic_version >= semantic_version(0, 50, 1)
-    end
-
-    # Create a {TTY::Link::SemanticVersion} instance from a version value
-    #
-    # @example
-    #   link.semantic_version(1, 2, 3)
-    #
-    # @example
-    #   link.semantic_version("1.2.3")
-    #
-    # @param [Array<Integer, String>] version
-    #   the version to convert to a semantic version
-    # @param [Hash{Symbol => String}] options
-    #   the options to convert to a semantic version
-    # @option options [String] :separator
-    #   the version separator
-    #
-    # @return [TTY::Link::SemanticVersion]
-    #
-    # @see SemanticVersion#from
-    #
-    # @api private
-    def semantic_version(*version, **options)
-      @semantic_version.from(*version, **options)
-    end
-
-    # Read the VTE version environment variable
-    #
-    # @example
-    #   link.vte_version
-    #   # => "5100"
-    #
-    # @return [String, nil]
-    #
-    # @api private
-    def vte_version
-      @env[VTE_VERSION]
     end
   end # Link
 end # TTY
