@@ -46,58 +46,14 @@ RSpec.describe TTY::Link do
     end
 
     context "when iTerm" do
-      let(:env_with_name) { {"TERM_PROGRAM" => "iTerm.app"} }
-
       it "supports a terminal program name with a version number" do
         env = {
-          "TERM_PROGRAM" => "iTerm 2.app",
-          "TERM_PROGRAM_VERSION" => "4.3.2"
+          "TERM_PROGRAM" => "iTerm.app",
+          "TERM_PROGRAM_VERSION" => "3.1.0"
         }
         link = described_class.new(env: env, output: output)
 
         expect(link.link?).to eq(true)
-      end
-
-      it "supports links above the 4.3.2 version" do
-        env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "4.3.2"})
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(true)
-      end
-
-      it "supports links above the 3.1.0 version" do
-        env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "3.2.1"})
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(true)
-      end
-
-      it "supports links on the 3.1.0 version" do
-        env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "3.1.0"})
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(true)
-      end
-
-      it "doesn't support links on the 3.0.1 version" do
-        env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "3.0.1"})
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(false)
-      end
-
-      it "doesn't support links below the 3.1.0 version" do
-        env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "2.3.4"})
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(false)
-      end
-
-      it "doesn't support links without a version" do
-        env = env_with_name.merge({"TERM_PROGRAM_VERSION" => nil})
-        link = described_class.new(env: env, output: output)
-
-        expect(link.link?).to eq(false)
       end
     end
 

@@ -18,14 +18,6 @@ module TTY
     BEL = "\a"
     private_constant :BEL
 
-    # The iTerm terminal name pattern
-    #
-    # @return [Regexp]
-    #
-    # @api private
-    ITERM = /iTerm(\s*\d+){0,1}.app/x.freeze
-    private_constant :ITERM
-
     # The hyperlink operating system command code
     #
     # @return [String]
@@ -41,22 +33,6 @@ module TTY
     # @api private
     SEP = ";"
     private_constant :SEP
-
-    # The term program environment variable name
-    #
-    # @return [String]
-    #
-    # @api private
-    TERM_PROGRAM = "TERM_PROGRAM"
-    private_constant :TERM_PROGRAM
-
-    # The term program version environment variable name
-    #
-    # @return [String]
-    #
-    # @api private
-    TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
-    private_constant :TERM_PROGRAM_VERSION
 
     # The VTE version environment variable name
     #
@@ -146,6 +122,7 @@ module TTY
       @env = env
       @output = output
       @semantic_version = SemanticVersion
+      @iterm = Terminals::Iterm.new(@semantic_version, @env)
     end
 
     # Generate terminal hyperlink
@@ -181,7 +158,7 @@ module TTY
     def link?
       return false unless tty?
 
-      return iterm_version? if iterm? && term_program_version
+      return true if @iterm.link?
 
       return vte_version? if vte?
 
@@ -189,34 +166,6 @@ module TTY
     end
 
     private
-
-    # Detect iTerm terminal
-    #
-    # @example
-    #   link.iterm?
-    #   # => true
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def iterm?
-      !(term_program =~ ITERM).nil?
-    end
-
-    # Detect whether the iTerm version supports terminal hyperlinks
-    #
-    # @example
-    #   link.iterm_version?
-    #   # => true
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def iterm_version?
-      current_semantic_version = semantic_version(term_program_version)
-
-      current_semantic_version >= semantic_version(3, 1, 0)
-    end
 
     # Detect the terminal device
     #
@@ -281,32 +230,6 @@ module TTY
     # @api private
     def semantic_version(*version, **options)
       @semantic_version.from(*version, **options)
-    end
-
-    # Read the term program environment variable
-    #
-    # @example
-    #   link.term_program
-    #   # => "iTerm.app"
-    #
-    # @return [String, nil]
-    #
-    # @api private
-    def term_program
-      @env[TERM_PROGRAM]
-    end
-
-    # Read the term program version environment variable
-    #
-    # @example
-    #   link.term_program_version
-    #   # => "1.2.3"
-    #
-    # @return [String, nil]
-    #
-    # @api private
-    def term_program_version
-      @env[TERM_PROGRAM_VERSION]
     end
 
     # Read the VTE version environment variable
