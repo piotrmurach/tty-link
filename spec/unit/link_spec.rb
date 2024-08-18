@@ -45,6 +45,15 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when Alacritty" do
+      it "supports links on any version" do
+        env = {"TERM" => "alacritty"}
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when iTerm" do
       it "supports a terminal program name with a version number" do
         env = {
