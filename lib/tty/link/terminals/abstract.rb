@@ -12,6 +12,20 @@ module TTY
       #
       # @api private
       class Abstract
+        # Register a terminal class with terminals
+        #
+        # @param [TTY::Link::Terminal::Abstract] terminal_class
+        #   the terminal class to register
+        #
+        # @return [void]
+        #
+        # @api private
+        def self.inherited(terminal_class)
+          super
+          Terminals.register(terminal_class)
+        end
+        private_class_method :inherited
+
         # Create an {TTY::Link::Terminals::Abstract} instance
         #
         # @example
