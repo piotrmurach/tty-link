@@ -113,7 +113,6 @@ module TTY
     def initialize(env: ENV, output: $stdout)
       @env = env
       @output = output
-      @semantic_version = SemanticVersion
     end
 
     # Generate terminal hyperlink
@@ -159,14 +158,13 @@ module TTY
     # @example
     #   link.terminals
     #
-    # @return [Array(TTY::Link::Terminals::Iterm, TTY::Link::Terminals::Vte)]
+    # @return [Array<TTY::Link::Terminals::Abstract>]
     #
     # @api private
     def terminals
-      @terminals ||= [
-        Terminals::Iterm.new(@semantic_version, @env),
-        Terminals::Vte.new(@semantic_version, @env)
-      ]
+      @terminals ||= Terminals.registered.map do |terminal_class|
+        terminal_class.new(SemanticVersion, @env)
+      end
     end
 
     # Detect the terminal device
