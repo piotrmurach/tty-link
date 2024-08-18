@@ -22,6 +22,33 @@ module TTY
       RUBY_FILE = "*.rb"
       private_constant :RUBY_FILE
 
+      # The registered terminal classes
+      #
+      # @example
+      #   TTY::Link::Terminals.registered
+      #
+      # @return [Array<TTY::Link::Terminals::Abstract>]
+      #
+      # @api private
+      def self.registered
+        @registered ||= []
+      end
+
+      # Register a terminal class
+      #
+      # @example
+      #   TTY::Link::Terminals.register(TTY::Link::Terminals::Iterm)
+      #
+      # @param [TTY::Link::Terminals::Abstract] terminal_class
+      #   the terminal class to register
+      #
+      # @return [void]
+      #
+      # @api private
+      def self.register(terminal_class)
+        registered << terminal_class
+      end
+
       # Require all terminal files from the terminals directory
       #
       # @example
