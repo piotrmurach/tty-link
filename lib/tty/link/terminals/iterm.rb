@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require_relative "abstract"
+
 module TTY
   class Link
     module Terminals
       # Responsible for detecting hyperlink support in the iTerm terminal
       #
       # @api private
-      class Iterm
+      class Iterm < Abstract
         # The iTerm terminal name pattern
         #
         # @return [Regexp]
@@ -30,35 +32,6 @@ module TTY
         # @api private
         TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
         private_constant :TERM_PROGRAM_VERSION
-
-        # Create an {TTY::Link::Terminals::Iterm} instance
-        #
-        # @example
-        #   iterm = TTY::Link::Terminals::Iterm.new(SemanticVersion, ENV)
-        #
-        # @param [TTY::Link::SemanticVersion] semantic_version
-        #   the semantic version creator
-        # @param [ENV, Hash{String => String}] env
-        #   the environment variables
-        #
-        # @api public
-        def initialize(semantic_version, env)
-          @semantic_version = semantic_version
-          @env = env
-        end
-
-        # Detect iTerm hyperlink support
-        #
-        # @example
-        #   iterm.link?
-        #   # => true
-        #
-        # @return [Boolean]
-        #
-        # @api public
-        def link?
-          name? && version?
-        end
 
         private
 
@@ -92,30 +65,6 @@ module TTY
           current_semantic_version >= semantic_version(3, 1, 0)
         end
 
-        # Create a {TTY::Link::SemanticVersion} instance from a version value
-        #
-        # @example
-        #   iterm.semantic_version(1, 2, 3)
-        #
-        # @example
-        #   iterm.semantic_version("1.2.3")
-        #
-        # @param [Array<Integer, String>] version
-        #   the version to convert to a semantic version
-        # @param [Hash{Symbol => String}] options
-        #   the options to convert to a semantic version
-        # @option options [String] :separator
-        #   the version separator
-        #
-        # @return [TTY::Link::SemanticVersion]
-        #
-        # @see SemanticVersion#from
-        #
-        # @api private
-        def semantic_version(*version, **options)
-          @semantic_version.from(*version, **options)
-        end
-
         # Read the term program environment variable
         #
         # @example
@@ -126,7 +75,7 @@ module TTY
         #
         # @api private
         def term_program
-          @env[TERM_PROGRAM]
+          env[TERM_PROGRAM]
         end
 
         # Read the term program version environment variable
@@ -139,7 +88,7 @@ module TTY
         #
         # @api private
         def term_program_version
-          @env[TERM_PROGRAM_VERSION]
+          env[TERM_PROGRAM_VERSION]
         end
       end # Iterm
     end # Terminals
