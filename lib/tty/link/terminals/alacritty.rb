@@ -17,14 +17,6 @@ module TTY
         ALACRITTY = /alacritty/i.freeze
         private_constant :ALACRITTY
 
-        # The term environment variable name
-        #
-        # @return [String]
-        #
-        # @api private
-        TERM = "TERM"
-        private_constant :TERM
-
         private
 
         # Detect Alacritty terminal
@@ -51,19 +43,6 @@ module TTY
         # @api private
         def version?
           true
-        end
-
-        # Read the term environment variable
-        #
-        # @example
-        #   alacritty.term
-        #   # => "alacritty"
-        #
-        # @return [String, nil]
-        #
-        # @api private
-        def term
-          env[TERM]
         end
       end # Alacritty
     end # Terminals
