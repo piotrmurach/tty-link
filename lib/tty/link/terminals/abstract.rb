@@ -28,6 +28,14 @@ module TTY
         TERM_PROGRAM = "TERM_PROGRAM"
         private_constant :TERM_PROGRAM
 
+        # The term program version environment variable name
+        #
+        # @return [String]
+        #
+        # @api private
+        TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
+        private_constant :TERM_PROGRAM_VERSION
+
         # Register a terminal class with terminals
         #
         # @param [TTY::Link::Terminal::Abstract] terminal_class
@@ -161,6 +169,19 @@ module TTY
         # @api private
         def term_program
           env[TERM_PROGRAM]
+        end
+
+        # Read the term program version environment variable
+        #
+        # @example
+        #   terminal.term_program_version
+        #   # => "1.2.3"
+        #
+        # @return [String, nil]
+        #
+        # @api private
+        def term_program_version
+          env[TERM_PROGRAM_VERSION]
         end
       end # Abstract
     end # Terminals
