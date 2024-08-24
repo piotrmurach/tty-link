@@ -66,6 +66,15 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when DomTerm" do
+      it "supports links above the 1.0.2 version" do
+        env = {"DOMTERM" => "QtDomTerm;version=1.0.2;tty=/dev/pts/1"}
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when iTerm" do
       it "supports a terminal program name with a version number" do
         env = {
