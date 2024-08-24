@@ -54,6 +54,18 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when Contour" do
+      it "supports a terminal name with a version number" do
+        env = {
+          "TERMINAL_NAME" => "contour",
+          "TERMINAL_VERSION_TRIPLE" => "0.1.0"
+        }
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when iTerm" do
       it "supports a terminal program name with a version number" do
         env = {
