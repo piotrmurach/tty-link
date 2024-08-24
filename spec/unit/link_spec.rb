@@ -84,6 +84,18 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when Hyper" do
+      it "supports links above the 2.0.0 version" do
+        env = {
+          "TERM_PROGRAM" => "Hyper",
+          "TERM_PROGRAM_VERSION" => "3.4.1"
+        }
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when iTerm" do
       it "supports a terminal program name with a version number" do
         env = {
