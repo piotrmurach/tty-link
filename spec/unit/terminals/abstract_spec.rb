@@ -118,4 +118,18 @@ RSpec.describe TTY::Link::Terminals::Abstract do
       expect(terminal.name).to eq("terminal")
     end
   end
+
+  describe "#term_program" do
+    it "accesses the term program environment variable in a subclass" do
+      env_with_term_program = {"TERM_PROGRAM" => "terminal"}
+      stub_const("Terminal", Class.new(described_class) do
+        def name
+          term_program
+        end
+      end)
+      terminal = Terminal.new(semantic_version, env_with_term_program)
+
+      expect(terminal.name).to eq("terminal")
+    end
+  end
 end

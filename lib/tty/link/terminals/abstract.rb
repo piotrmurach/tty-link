@@ -20,6 +20,14 @@ module TTY
         TERM = "TERM"
         private_constant :TERM
 
+        # The term program environment variable name
+        #
+        # @return [String]
+        #
+        # @api private
+        TERM_PROGRAM = "TERM_PROGRAM"
+        private_constant :TERM_PROGRAM
+
         # Register a terminal class with terminals
         #
         # @param [TTY::Link::Terminal::Abstract] terminal_class
@@ -140,6 +148,19 @@ module TTY
         # @api private
         def term
           env[TERM]
+        end
+
+        # Read the term program environment variable
+        #
+        # @example
+        #   terminal.term_program
+        #   # => "iTerm.app"
+        #
+        # @return [String, nil]
+        #
+        # @api private
+        def term_program
+          env[TERM_PROGRAM]
         end
       end # Abstract
     end # Terminals
