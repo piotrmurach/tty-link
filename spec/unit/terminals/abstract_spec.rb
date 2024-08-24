@@ -104,4 +104,18 @@ RSpec.describe TTY::Link::Terminals::Abstract do
       expect(terminal.version.inspect).to eq("1.2.3")
     end
   end
+
+  describe "#term" do
+    it "accesses the term environment variable in a subclass" do
+      env_with_term = {"TERM" => "terminal"}
+      stub_const("Terminal", Class.new(described_class) do
+        def name
+          term
+        end
+      end)
+      terminal = Terminal.new(semantic_version, env_with_term)
+
+      expect(terminal.name).to eq("terminal")
+    end
+  end
 end

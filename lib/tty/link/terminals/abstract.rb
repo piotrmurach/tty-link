@@ -12,6 +12,14 @@ module TTY
       #
       # @api private
       class Abstract
+        # The term environment variable name
+        #
+        # @return [String]
+        #
+        # @api private
+        TERM = "TERM"
+        private_constant :TERM
+
         # Register a terminal class with terminals
         #
         # @param [TTY::Link::Terminal::Abstract] terminal_class
@@ -119,6 +127,19 @@ module TTY
         # @api private
         def semantic_version(*version, **options)
           @semantic_version.from(*version, **options)
+        end
+
+        # Read the term environment variable
+        #
+        # @example
+        #   terminal.term
+        #   # => "alacritty"
+        #
+        # @return [String, nil]
+        #
+        # @api private
+        def term
+          env[TERM]
         end
       end # Abstract
     end # Terminals
