@@ -126,6 +126,15 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when Konsole" do
+      it "supports links above the 20.12.0 version" do
+        env = {"KONSOLE_VERSION" => "20.12.0"}
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when VTE" do
       it "supports links above the 0.50.1 version" do
         env = {"VTE_VERSION" => "5001"}
