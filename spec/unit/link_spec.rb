@@ -135,6 +135,18 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when mintty" do
+      it "supports links above the 2.9.7 version" do
+        env = {
+          "TERM_PROGRAM" => "mintty",
+          "TERM_PROGRAM_VERSION" => "2.9.7"
+        }
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when VTE" do
       it "supports links above the 0.50.1 version" do
         env = {"VTE_VERSION" => "5001"}
