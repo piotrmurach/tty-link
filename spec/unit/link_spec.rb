@@ -159,6 +159,15 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when Tabby" do
+      it "supports links on any version" do
+        env = {"TERM_PROGRAM" => "Tabby"}
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when VTE" do
       it "supports links above the 0.50.1 version" do
         env = {"VTE_VERSION" => "5001"}
