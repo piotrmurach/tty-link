@@ -200,5 +200,17 @@ RSpec.describe TTY::Link do
         expect(link.link?).to eq(true)
       end
     end
+
+    context "when WezTerm" do
+      it "supports links above the 20180218 version" do
+        env = {
+          "TERM_PROGRAM" => "WezTerm",
+          "TERM_PROGRAM_VERSION" => "20180218-123-abc"
+        }
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
   end
 end
