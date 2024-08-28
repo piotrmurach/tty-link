@@ -212,5 +212,14 @@ RSpec.describe TTY::Link do
         expect(link.link?).to eq(true)
       end
     end
+
+    context "when Windows Terminal" do
+      it "supports links on any version" do
+        env = {"WT_SESSION" => "123-abc"}
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
   end
 end
