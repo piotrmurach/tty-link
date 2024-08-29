@@ -61,6 +61,28 @@ In cases when the terminal cannot support hyperlinks, an alternative is printed:
 # TTY toolkit -> https://ttytoolkit.org
 ```
 
+## Supported Terminals
+
+The **TTY::Link** supports hyperlink generation in the following terminals:
+
+* `Alacritty`
+* `Contour`
+* `DomTerm`
+* `foot`
+* `Hyper`
+* `iTerm2`
+* `JediTerm`
+* `kitty`
+* `Konsole`
+* `mintty`
+* `Rio`
+* `Tabby`
+* `Terminology`
+* `VSCode`
+* `VTE (GNOME, Xfce, ROXTerm, Guake, sakura, Terminator)`
+* `WezTerm`
+* `Windows Terminal`
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies.
