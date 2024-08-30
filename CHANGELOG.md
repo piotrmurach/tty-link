@@ -6,6 +6,7 @@
 * Add the ability to configure the environment variables and output stream
   to the link_to method
 * Add the ability to configure environment variables to the link? method
+* Add the ability to create hyperlinks from the URL only to the link_to method
 * Add hyperlinks support detection in Alacritty, Contour, DomTerm, foot, Hyper,
   JediTerm, kitty, Konsole, mintty, Rio, Tabby, Terminology, VSCode, WezTerm
   and Windows Terminal
