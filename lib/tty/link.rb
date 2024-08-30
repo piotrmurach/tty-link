@@ -40,6 +40,9 @@ module TTY
     #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org")
     #
     # @example
+    #   TTY::Link.link_to("https://ttytoolkit.org")
+    #
+    # @example
     #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
     #                     env: {"VTE_VERSION" => "7603"})
     #
@@ -49,7 +52,7 @@ module TTY
     #
     # @param [String] name
     #   the name for the URL
-    # @param [String] url
+    # @param [String, nil] url
     #   the URL target
     # @param [ENV, Hash{String => String}] env
     #   the environment variables
@@ -61,7 +64,7 @@ module TTY
     # @see #link_to
     #
     # @api public
-    def self.link_to(name, url, env: ENV, output: $stdout)
+    def self.link_to(name, url = nil, env: ENV, output: $stdout)
       new(env: env, output: output).link_to(name, url)
     end
 
@@ -120,15 +123,20 @@ module TTY
     # @example
     #   link.link_to("TTY Toolkit", "https://ttytoolkit.org")
     #
+    # @example
+    #   link.link_to("https://ttytoolkit.org")
+    #
     # @param [String] name
     #   the name for the URL
-    # @param [String] url
+    # @param [String, nil] url
     #   the URL target
     #
     # @return [String]
     #
     # @api public
-    def link_to(name, url)
+    def link_to(name, url = nil)
+      url ||= name
+
       if link?
         [OSC8, SEP, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
