@@ -61,6 +61,47 @@ In cases when the terminal cannot support hyperlinks, an alternative is printed:
 # TTY toolkit -> https://ttytoolkit.org
 ```
 
+## API
+
+### link_to
+
+The `link_to` method accepts two arguments, the name and the URL. The second
+URL argument is optional.
+
+For example, to create a hyperlink to `https://ttytoolkit.org`
+named `TTY Toolkit`:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+```
+
+To create a hyperlink where the name is the same as the URL:
+
+```ruby
+link.link_to("https://ttytoolkit.org")
+```
+
+#### :attrs
+
+The `link_to` method accepts the `:attrs` keyword to define attributes for a
+hyperlink. Note that currently, hyperlink-capable terminals support only the
+`id` attribute. However, there is no limitation on the attribute names to
+allow future support.
+
+For example, to define the `id` attribute:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org", attrs: {id: "tty-toolkit"})
+```
+
+To define many attributes such as `id`, `lang` and `title`:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org", attrs: {
+  id: "tty-toolkit", lang: "en", title: "Terminal Apps The Easy Way"
+})
+```
+
 ## Supported Terminals
 
 The **TTY::Link** supports hyperlink generation in the following terminals:
