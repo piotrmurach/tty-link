@@ -102,6 +102,40 @@ link.link_to("TTY Toolkit", "https://ttytoolkit.org", attrs: {
 })
 ```
 
+#### :plain
+
+The `link_to` method creates a plain URL replacement on terminals without
+hyperlink support. By default, it creates a plain string using a
+`:name -> :url` template.
+
+For example, given a link to `https://ttytoolkit.org` named `TTY Toolkit`:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+```
+
+This will create the following string:
+
+```ruby
+"TTY toolkit -> https://ttytoolkit.org"
+```
+
+Use the `:plain` keyword to define a custom hyperlink replacement template.
+There are two tokens available: `:name` and `:url`. These are optional. When
+present the `link_to` method replaces the token with the given argument.
+
+For example, to display the name with the URL surrounded by brackets:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org", plain: ":name (:url)")
+```
+
+This will create the following string:
+
+```ruby
+"TTY toolkit (https://ttytoolkit.org)"
+```
+
 ## Supported Terminals
 
 The **TTY::Link** supports hyperlink generation in the following terminals:
