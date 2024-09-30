@@ -40,6 +40,44 @@ RSpec.describe TTY::Link do
           expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
         end
       end
+
+      context "with :plain option" do
+        it "creates a terminal link replacement with :name and :url tokens" do
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: {}, output: output, plain: ":name (:url)"
+          )
+
+          expect(linked).to eql("TTY Toolkit (https://ttytoolkit.org)")
+        end
+
+        it "creates a terminal link replacement with only a name token" do
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: {}, output: output, plain: ":name"
+          )
+
+          expect(linked).to eql("TTY Toolkit")
+        end
+
+        it "creates a terminal link replacement with only a url token" do
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: {}, output: output, plain: ":url"
+          )
+
+          expect(linked).to eql("https://ttytoolkit.org")
+        end
+
+        it "creates a terminal link replacement with no tokens" do
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: {}, output: output, plain: "alternative url"
+          )
+
+          expect(linked).to eql("alternative url")
+        end
+      end
     end
 
     context "when supported terminal" do
@@ -87,6 +125,19 @@ RSpec.describe TTY::Link do
           )
         end
       end
+
+      context "with :plain option" do
+        it "creates a terminal link excluding a plain template" do
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env, output: output, plain: ":name (:url)"
+          )
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+      end
     end
   end
 
@@ -118,6 +169,44 @@ RSpec.describe TTY::Link do
           )
 
           expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+      end
+
+      context "with :plain option" do
+        it "creates a terminal link replacement with :name and :url tokens" do
+          link = described_class.new(env: {}, output: output)
+          linked = link.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org", plain: ":name (:url)"
+          )
+
+          expect(linked).to eql("TTY Toolkit (https://ttytoolkit.org)")
+        end
+
+        it "creates a terminal link replacement with only a name token" do
+          link = described_class.new(env: {}, output: output)
+          linked = link.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org", plain: ":name"
+          )
+
+          expect(linked).to eql("TTY Toolkit")
+        end
+
+        it "creates a terminal link replacement with only a url token" do
+          link = described_class.new(env: {}, output: output)
+          linked = link.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org", plain: ":url"
+          )
+
+          expect(linked).to eql("https://ttytoolkit.org")
+        end
+
+        it "creates a terminal link replacement with no tokens" do
+          link = described_class.new(env: {}, output: output)
+          linked = link.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org", plain: "alternative url"
+          )
+
+          expect(linked).to eql("alternative url")
         end
       end
     end
@@ -163,6 +252,19 @@ RSpec.describe TTY::Link do
           expect(linked).to eql(
             "\e]8;id=tty-toolkit:lang=en:title=Terminal Apps The Easy Way;" \
             "https://ttytoolkit.org\ahttps://ttytoolkit.org\e]8;;\a"
+          )
+        end
+      end
+
+      context "with :plain option" do
+        it "creates a terminal link excluding a plain template" do
+          link = described_class.new(env: env, output: output)
+          linked = link.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org", plain: ":name (:url)"
+          )
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
           )
         end
       end

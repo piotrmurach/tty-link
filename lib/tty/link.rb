@@ -34,6 +34,14 @@ module TTY
     BEL = "\a"
     private_constant :BEL
 
+    # The default replacement template
+    #
+    # @return [String]
+    #
+    # @api private
+    DEFAULT_REPLACEMENT_TEMPLATE = ":name -> :url"
+    private_constant :DEFAULT_REPLACEMENT_TEMPLATE
+
     # The hyperlink operating system command code
     #
     # @return [String]
@@ -41,6 +49,14 @@ module TTY
     # @api private
     OSC8 = "\e]8"
     private_constant :OSC8
+
+    # The replacement tokens pattern
+    #
+    # @return [Regexp]
+    #
+    # @api private
+    REPLACEMENT_TOKENS_PATTERN = /:(name|url)/i.freeze
+    private_constant :REPLACEMENT_TOKENS_PATTERN
 
     # The parameters separator
     #
@@ -70,6 +86,10 @@ module TTY
     #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
     #                     output: $stderr)
     #
+    # @example
+    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
+    #                     plain: ":name (:url)")
+    #
     # @param [String] name
     #   the name for the URL
     # @param [String, nil] url
@@ -80,14 +100,18 @@ module TTY
     #   the environment variables
     # @param [IO] output
     #   the output stream, defaults to $stdout
+    # @param [String] plain
+    #   the plain URL replacement template
     #
     # @return [String]
     #
     # @see #link_to
     #
     # @api public
-    def self.link_to(name, url = nil, attrs: {}, env: ENV, output: $stdout)
-      new(env: env, output: output).link_to(name, url, attrs: attrs)
+    def self.link_to(name, url = nil, attrs: {}, env: ENV, output: $stdout,
+                     plain: nil)
+      new(env: env, output: output)
+        .link_to(name, url, attrs: attrs, plain: plain)
     end
 
     # Detect terminal hyperlink support
@@ -156,24 +180,32 @@ module TTY
     #   link.link_to("https://ttytoolkit.org",
     #                attrs: {id: "tty-toolkit", title: "TTY Toolkit"})
     #
+    # @example
+    #   link.link_to("TTY Toolkit", "https://ttytoolkit.org",
+    #                plain: ":name (:url)")
+    #
     # @param [String] name
     #   the name for the URL
     # @param [String, nil] url
     #   the URL target
     # @param [Hash{Symbol => String}] attrs
     #   the URL attributes
+    # @param [String] plain
+    #   the plain URL replacement template
     #
     # @return [String]
     #
     # @api public
-    def link_to(name, url = nil, attrs: {})
+    def link_to(name, url = nil, attrs: {}, plain: nil)
       url ||= name
 
       if link?
         attributes = convert_to_attributes(attrs)
         [OSC8, SEP, attributes, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
       else
-        "#{name} -> #{url}"
+        replacements = {":name" => name, ":url" => url}
+        (plain || DEFAULT_REPLACEMENT_TEMPLATE)
+          .gsub(REPLACEMENT_TOKENS_PATTERN, replacements)
       end
     end
 
