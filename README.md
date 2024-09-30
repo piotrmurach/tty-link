@@ -63,6 +63,49 @@ In cases when the terminal cannot support hyperlinks, an alternative is printed:
 
 ## API
 
+### new
+
+#### :plain
+
+The `new` method accepts the `:plain` keyword to define a text-only hyperlink
+replacement template. The [link_to](#link_to) method uses the template to
+create a plain URL alternative on terminals without hyperlink support.
+
+The template can contain two tokens, the `:name` and the `:url`. The tokens
+are optional. The `:name -> :url` is the default template. The
+[link_to](#link_to) method replaces the present token with the given argument.
+
+For example, given a link to `https://ttytoolkit.org` named `TTY Toolkit`:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+```
+
+This will create the following string from the default template:
+
+```ruby
+"TTY toolkit -> https://ttytoolkit.org"
+```
+
+To change the default template and display links, for example, with the name
+and the URL surrounded by brackets:
+
+```ruby
+link = TTY::Link.new(plain: ":name (:url)")
+```
+
+Then passing the same arguments to the [link_to](#link_to) method:
+
+```ruby
+link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+```
+
+This will create the following string from the custom template:
+
+```ruby
+"TTY toolkit (https://ttytoolkit.org)"
+```
+
 ### link_to
 
 The `link_to` method accepts two arguments, the name and the URL. The second
