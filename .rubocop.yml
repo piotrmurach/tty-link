@@ -33,6 +33,9 @@ Metrics/ModuleLength:
 Metrics/PerceivedComplexity:
   Max: 5
 
+Metrics/ParameterLists:
+  Enabled: false
+
 Naming/FileName:
   Exclude:
     - "lib/tty-link.rb"
