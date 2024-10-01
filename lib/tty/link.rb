@@ -11,30 +11,6 @@ module TTY
   #
   # @api public
   class Link
-    # The attribute separator
-    #
-    # @return [String]
-    #
-    # @api private
-    ATTRIBUTE_SEPARATOR = "="
-    private_constant :ATTRIBUTE_SEPARATOR
-
-    # The attribute pair separator
-    #
-    # @return [String]
-    #
-    # @api private
-    ATTRIBUTE_PAIR_SEPARATOR = ":"
-    private_constant :ATTRIBUTE_PAIR_SEPARATOR
-
-    # The bell control code
-    #
-    # @return [String]
-    #
-    # @api private
-    BEL = "\a"
-    private_constant :BEL
-
     # The default plain URL template
     #
     # @return [String]
@@ -43,14 +19,6 @@ module TTY
     DEFAULT_TEMPLATE = ":name -> :url"
     private_constant :DEFAULT_TEMPLATE
 
-    # The hyperlink operating system command code
-    #
-    # @return [String]
-    #
-    # @api private
-    OSC8 = "\e]8"
-    private_constant :OSC8
-
     # The replacement tokens pattern
     #
     # @return [Regexp]
@@ -58,14 +26,6 @@ module TTY
     # @api private
     REPLACEMENT_TOKENS_PATTERN = /:(name|url)/i.freeze
     private_constant :REPLACEMENT_TOKENS_PATTERN
-
-    # The parameters separator
-    #
-    # @return [String]
-    #
-    # @api private
-    SEP = ";"
-    private_constant :SEP
 
     # Generate terminal hyperlink
     #
@@ -201,8 +161,7 @@ module TTY
       url ||= name
 
       if link?
-        attributes = convert_to_attributes(attrs)
-        [OSC8, SEP, attributes, SEP, url, BEL, name, OSC8, SEP, SEP, BEL].join
+        ansi_link(name, url, attrs).to_s
       else
         replacements = {":name" => name, ":url" => url}
         @plain.gsub(REPLACEMENT_TOKENS_PATTERN, replacements)
@@ -226,22 +185,25 @@ module TTY
 
     private
 
-    # Convert the attributes hash to a string list
+    # Create an {TTY::Link::ANSILink} instance
     #
     # @example
-    #   link.convert_to_attributes({id: "tty-toolkit", title: "TTY Toolkit"})
-    #   # => "id=tty-toolkit:title=TTY Toolkit"
+    #   ansi_link("TTY Toolkit", "https://ttytoolkit.org", {id: "tty-tookit"})
     #
+    # @param [String] name
+    #   the URL name
+    # @param [String] url
+    #   the URL target
     # @param [Hash{Symbol => String}] attrs
-    #   the attributes to convert to a string list
+    #   the URL attributes
     #
-    # @return [String]
+    # @return [TTY::Link::ANSILink]
+    #
+    # @see ANSILink#new
     #
     # @api private
-    def convert_to_attributes(attrs)
-      attrs.map do |attr_pair|
-        attr_pair.join(ATTRIBUTE_SEPARATOR)
-      end.join(ATTRIBUTE_PAIR_SEPARATOR)
+    def ansi_link(name, url, attrs)
+      ANSILink.new(name, url, attrs)
     end
 
     # Terminals for detecting hyperlink support
