@@ -2,6 +2,7 @@
 
 require_relative "link/ansi_link"
 require_relative "link/errors"
+require_relative "link/plain_link"
 require_relative "link/semantic_version"
 require_relative "link/terminals"
 require_relative "link/version"
