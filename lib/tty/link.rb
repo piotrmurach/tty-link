@@ -20,14 +20,6 @@ module TTY
     DEFAULT_REPLACEMENT_TEMPLATE = ":name -> :url"
     private_constant :DEFAULT_REPLACEMENT_TEMPLATE
 
-    # The replacement tokens pattern
-    #
-    # @return [Regexp]
-    #
-    # @api private
-    REPLACEMENT_TOKENS_PATTERN = /:(name|url)/i.freeze
-    private_constant :REPLACEMENT_TOKENS_PATTERN
-
     # Generate terminal hyperlink
     #
     # @example
@@ -71,7 +63,7 @@ module TTY
     #
     # @api public
     def self.link_to(name, url = nil, attrs: {}, env: ENV, output: $stdout,
-                     plain: nil)
+                     plain: DEFAULT_REPLACEMENT_TEMPLATE)
       new(env: env, output: output)
         .link_to(name, url, attrs: attrs, plain: plain)
     end
@@ -158,15 +150,13 @@ module TTY
     # @return [String]
     #
     # @api public
-    def link_to(name, url = nil, attrs: {}, plain: nil)
+    def link_to(name, url = nil, attrs: {}, plain: DEFAULT_REPLACEMENT_TEMPLATE)
       url ||= name
 
       if link?
         ansi_link(name, url, attrs).to_s
       else
-        replacements = {":name" => name, ":url" => url}
-        (plain || DEFAULT_REPLACEMENT_TEMPLATE)
-          .gsub(REPLACEMENT_TOKENS_PATTERN, replacements)
+        plain_link(name, url, plain).to_s
       end
     end
 
@@ -206,6 +196,27 @@ module TTY
     # @api private
     def ansi_link(name, url, attrs)
       ANSILink.new(name, url, attrs)
+    end
+
+    # Create a {TTY::Link::PlainLink} instance
+    #
+    # @example
+    #   plain_link("TTY Toolkit", "https://ttytoolkit.org", ":name (:url)")
+    #
+    # @param [String] name
+    #   the name for the URL
+    # @param [String, nil] url
+    #   the URL target
+    # @param [String] plain
+    #   the plain URL replacement template
+    #
+    # @return [TTY::Link::PlainLink]
+    #
+    # @see PlainLink#new
+    #
+    # @api private
+    def plain_link(name, url, plain)
+      PlainLink.new(name, url, plain)
     end
 
     # Terminals for detecting hyperlink support
