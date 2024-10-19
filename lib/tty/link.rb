@@ -21,6 +21,14 @@ module TTY
     DEFAULT_TEMPLATE = ":name -> :url"
     private_constant :DEFAULT_TEMPLATE
 
+    # The hyperlink environment variable name
+    #
+    # @return [String]
+    #
+    # @api private
+    HYPERLINK_ENV = "TTY_LINK_HYPERLINK"
+    private_constant :HYPERLINK_ENV
+
     # Generate terminal hyperlink
     #
     # @example
@@ -133,7 +141,7 @@ module TTY
     def initialize(env: ENV, hyperlink: :auto, output: $stdout,
                    plain: DEFAULT_TEMPLATE)
       @env = env
-      @hyperlink_parameter = hyperlink_parameter(hyperlink)
+      @hyperlink_parameter = hyperlink_parameter(hyperlink_env || hyperlink)
       @output = output
       @plain = plain
     end
@@ -223,6 +231,19 @@ module TTY
     # @api private
     def ansi_link(name, url, attrs)
       ANSILink.new(name, url, attrs)
+    end
+
+    # Read the hyperlink environment variable
+    #
+    # @example
+    #   link.hyperlink_env
+    #   # => "always"
+    #
+    # @return [String, nil]
+    #
+    # @api private
+    def hyperlink_env
+      @env[HYPERLINK_ENV]
     end
 
     # Create a {TTY::Link::HyperlinkParameter} instance

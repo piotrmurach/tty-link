@@ -81,6 +81,51 @@ RSpec.describe TTY::Link do
         end
       end
 
+      context "with hyperlink environment variable" do
+        it "creates a terminal link with an always value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "always"}
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env_with_hyperlink, output: output
+          )
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+
+        it "creates a terminal link replacement with an auto value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "auto"}
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env_with_hyperlink, output: output
+          )
+
+          expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+
+        it "creates a terminal link replacement with a never value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "never"}
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env_with_hyperlink, output: output
+          )
+
+          expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+
+        it "fails to create a terminal link with an invalid value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "invalid"}
+
+          expect {
+            described_class.link_to(
+              "TTY Toolkit", "https://ttytoolkit.org",
+              env: env_with_hyperlink, output: output
+            )
+          }.to raise_error(TTY::Link::ValueError)
+        end
+      end
+
       context "with :plain option" do
         it "creates a terminal link replacement with name and url tokens" do
           linked = described_class.link_to(
@@ -208,6 +253,53 @@ RSpec.describe TTY::Link do
         end
       end
 
+      context "with hyperlink environment variable" do
+        it "creates a terminal link with an always value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "always")
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env_with_hyperlink, output: output
+          )
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+
+        it "creates a terminal link with an auto value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "auto")
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env_with_hyperlink, output: output
+          )
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+
+        it "creates a terminal link replacement with a never value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "never")
+          linked = described_class.link_to(
+            "TTY Toolkit", "https://ttytoolkit.org",
+            env: env_with_hyperlink, output: output
+          )
+
+          expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+
+        it "fails to create a terminal link with an invalid value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "invalid")
+
+          expect {
+            described_class.link_to(
+              "TTY Toolkit", "https://ttytoolkit.org",
+              env: env_with_hyperlink, output: output
+            )
+          }.to raise_error(TTY::Link::ValueError)
+        end
+      end
+
       context "with :plain option" do
         it "creates a terminal link excluding a plain template" do
           linked = described_class.link_to(
@@ -283,6 +375,42 @@ RSpec.describe TTY::Link do
         it "fails to create a terminal link with an invalid value" do
           expect {
             described_class.new(env: {}, hyperlink: :invalid, output: output)
+          }.to raise_error(TTY::Link::ValueError)
+        end
+      end
+
+      context "with hyperlink environment variable" do
+        it "creates a terminal link with an always value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "always"}
+          link = described_class.new(env: env_with_hyperlink, output: output)
+          linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+
+        it "creates a terminal link replacement with an auto value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "auto"}
+          link = described_class.new(env: env_with_hyperlink, output: output)
+          linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+          expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+
+        it "creates a terminal link replacement with a never value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "never"}
+          link = described_class.new(env: env_with_hyperlink, output: output)
+          linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+          expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+
+        it "fails to create a terminal link with an invalid value" do
+          env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "invalid"}
+
+          expect {
+            described_class.new(env: env_with_hyperlink, output: output)
           }.to raise_error(TTY::Link::ValueError)
         end
       end
@@ -400,6 +528,44 @@ RSpec.describe TTY::Link do
         it "fails to create a terminal link with an invalid value" do
           expect {
             described_class.new(env: env, hyperlink: :invalid, output: output)
+          }.to raise_error(TTY::Link::ValueError)
+        end
+      end
+
+      context "with hyperlink environment variable" do
+        it "creates a terminal link with an always value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "always")
+          link = described_class.new(env: env_with_hyperlink, output: output)
+          linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+
+        it "creates a terminal link with an auto value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "auto")
+          link = described_class.new(env: env_with_hyperlink, output: output)
+          linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+          expect(linked).to eql(
+            "\e]8;;https://ttytoolkit.org\aTTY Toolkit\e]8;;\a"
+          )
+        end
+
+        it "creates a terminal link replacement with a never value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "never")
+          link = described_class.new(env: env_with_hyperlink, output: output)
+          linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+          expect(linked).to eql("TTY Toolkit -> https://ttytoolkit.org")
+        end
+
+        it "fails to create a terminal link with an invalid value" do
+          env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "invalid")
+
+          expect {
+            described_class.new(env: env_with_hyperlink, output: output)
           }.to raise_error(TTY::Link::ValueError)
         end
       end
