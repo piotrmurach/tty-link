@@ -39,6 +39,10 @@ module TTY
     #
     # @example
     #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
+    #                     hyperlink: :always)
+    #
+    # @example
+    #   TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org",
     #                     output: $stderr)
     #
     # @example
@@ -53,6 +57,8 @@ module TTY
     #   the URL attributes
     # @param [ENV, Hash{String => String}] env
     #   the environment variables
+    # @param [String, Symbol] hyperlink
+    #   the hyperlink detection out of always, auto or never
     # @param [IO] output
     #   the output stream, defaults to $stdout
     # @param [String] plain
@@ -63,9 +69,9 @@ module TTY
     # @see #link_to
     #
     # @api public
-    def self.link_to(name, url = nil, attrs: {}, env: ENV, output: $stdout,
-                     plain: DEFAULT_TEMPLATE)
-      new(env: env, output: output, plain: plain)
+    def self.link_to(name, url = nil, attrs: {}, env: ENV, hyperlink: :auto,
+                     output: $stdout, plain: DEFAULT_TEMPLATE)
+      new(env: env, hyperlink: hyperlink, output: output, plain: plain)
         .link_to(name, url, attrs: attrs)
     end
 
@@ -106,6 +112,9 @@ module TTY
     #   link = TTY::Link.new(env: {"VTE_VERSION" => "7603"})
     #
     # @example
+    #   link = TTY::Link.new(hyperlink: :always)
+    #
+    # @example
     #   link = TTY::Link.new(output: $stderr)
     #
     # @example
@@ -113,14 +122,18 @@ module TTY
     #
     # @param [ENV, Hash{String => String}] env
     #   the environment variables
+    # @param [String, Symbol] hyperlink
+    #   the hyperlink detection out of always, auto or never
     # @param [IO] output
     #   the output stream, defaults to $stdout
     # @param [String] plain
     #   the plain URL template
     #
     # @api public
-    def initialize(env: ENV, output: $stdout, plain: DEFAULT_TEMPLATE)
+    def initialize(env: ENV, hyperlink: :auto, output: $stdout,
+                   plain: DEFAULT_TEMPLATE)
       @env = env
+      @hyperlink_parameter = hyperlink_parameter(hyperlink)
       @output = output
       @plain = plain
     end
@@ -154,7 +167,7 @@ module TTY
     def link_to(name, url = nil, attrs: {})
       url ||= name
 
-      if link?
+      if ansi_link?
         ansi_link(name, url, attrs).to_s
       else
         plain_link(name, url).to_s
@@ -178,6 +191,19 @@ module TTY
 
     private
 
+    # Whether to create an {TTY::Link::ANSILink} or a {TTY::Link::PlainLink}
+    #
+    # @example
+    #   link.ansi_link?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def ansi_link?
+      @hyperlink_parameter.always? || (@hyperlink_parameter.auto? && link?)
+    end
+
     # Create an {TTY::Link::ANSILink} instance
     #
     # @example
@@ -197,6 +223,24 @@ module TTY
     # @api private
     def ansi_link(name, url, attrs)
       ANSILink.new(name, url, attrs)
+    end
+
+    # Create a {TTY::Link::HyperlinkParameter} instance
+    #
+    # @example
+    #   link.hyperlink_parameter(:always)
+    #
+    # @param [String, Symbol] hyperlink
+    #   the hyperlink detection out of always, auto or never
+    #
+    # @return [TTY::Link::HyperlinkParameter]
+    #
+    # @raise [TTY::Link::ValueError]
+    #   the value isn't always, auto or never
+    #
+    # @api private
+    def hyperlink_parameter(hyperlink)
+      HyperlinkParameter.new(hyperlink)
     end
 
     # Create a {TTY::Link::PlainLink} instance
