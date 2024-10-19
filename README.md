@@ -65,6 +65,27 @@ In cases when the terminal cannot support hyperlinks, an alternative is printed:
 
 ### new
 
+#### :hyperlink
+
+The `new` method accepts the `:hyperlink` keyword to control terminal hyperlink
+support detection. The available values are `:always`, `:auto` and `:never`. The
+keyword defaults to the `:auto` value to allow the [link?](#link) method
+to check whether the given terminal supports hyperlinks.
+
+For example, use the `:always` value to force the [link_to](#link_to) method
+to create hyperlinks without checking terminal support:
+
+```ruby
+link = TTY::Link.new(hyperlink: :always)
+```
+
+Or, use the `:never` value to force the [link_to](#link_to) to create
+text-only links:
+
+```ruby
+link = TTY::Link.new(hyperlink: :never)
+```
+
 #### :plain
 
 The `new` method accepts the `:plain` keyword to define a text-only hyperlink
