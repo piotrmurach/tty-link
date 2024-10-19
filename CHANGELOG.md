@@ -5,6 +5,8 @@
 ### Added
 * Add the ability to configure the environment variables, hyperlink detection,
   output stream and plain URL template to the initialize method
+* Add the ability to configure the hyperlink detection with the environment
+  variable
 * Add the ability to create hyperlinks from the URL only to the link_to method
 * Add an attrs option to the link_to method to allow configuring URL attributes
 * Add hyperlinks support detection in Alacritty, Contour, DomTerm, foot, Hyper,
