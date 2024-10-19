@@ -86,6 +86,13 @@ text-only links:
 link = TTY::Link.new(hyperlink: :never)
 ```
 
+Alternatively, set the `TTY_LINK_HYPERLINK` environment variable to configure
+the `:hyperlink` value:
+
+```shell
+TTY_LINK_HYPERLINK=always
+```
+
 #### :plain
 
 The `new` method accepts the `:plain` keyword to define a text-only hyperlink
