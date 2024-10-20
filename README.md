@@ -158,6 +158,19 @@ This will create the following string from the custom template:
 "TTY toolkit (https://ttytoolkit.org)"
 ```
 
+### link?
+
+The `link?` method detects whether the terminal supports hyperlinks against
+[supported terminals](#supported-terminals). The [link_to](#link_to) method
+uses this detection to decide whether to create a hyperlink or plain text
+alternative.
+
+For example, to check the current terminal hyperlink support:
+
+```ruby
+link.link?
+```
+
 ### link_to
 
 The `link_to` method accepts two arguments, the name and the URL. The second
