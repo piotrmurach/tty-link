@@ -78,6 +78,17 @@ For example, to define only an environment variable `TTY_LINK_HYPERLINK` with
 link = TTY::Link.new(env: {"TTY_LINK_HYPERLINK" => "always"})
 ```
 
+#### :output
+
+The `new` method accepts the `:output` keyword to define the output stream. The
+keyword defaults to the standard output.
+
+For example, to use the standard error stream:
+
+```ruby
+link = TTY::Link.new(output: $stderr)
+```
+
 #### :hyperlink
 
 The `new` method accepts the `:hyperlink` keyword to control terminal hyperlink
