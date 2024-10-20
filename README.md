@@ -65,6 +65,19 @@ In cases when the terminal cannot support hyperlinks, an alternative is printed:
 
 ### new
 
+#### :env
+
+The `new` method accepts the `:env` keyword to define environment variables.
+The keyword defaults to the `ENV` object that holds the current environment
+variables.
+
+For example, to define only an environment variable `TTY_LINK_HYPERLINK` with
+`always` value:
+
+```ruby
+link = TTY::Link.new(env: {"TTY_LINK_HYPERLINK" => "always"})
+```
+
 #### :hyperlink
 
 The `new` method accepts the `:hyperlink` keyword to control terminal hyperlink
