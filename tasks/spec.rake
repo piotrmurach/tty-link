@@ -18,9 +18,14 @@ begin
     RSpec::Core::RakeTask.new(:integration) do |task|
       task.pattern = "spec/integration{,/*/**}/*_spec.rb"
     end
+
+    desc "Run performance specs"
+    RSpec::Core::RakeTask.new(:perf) do |task|
+      task.pattern = "spec/perf{,/*/**}/*_spec.rb"
+    end
   end
 rescue LoadError
-  %w[spec spec:unit spec:integration].each do |name|
+  %w[spec spec:unit spec:integration spec:perf].each do |name|
     desc "Run #{name == "spec" ? "all" : name.split(":").last} specs"
     task name do
       warn "In order to run #{name}, do `gem install rspec`"
