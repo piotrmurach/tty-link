@@ -58,18 +58,67 @@ $ gem install tty-link
 
 ## 1. Usage
 
-To print hyperlink in your terminal do:
+Create a **TTY::Link** instance:
 
 ```ruby
-puts TTY::Link.link_to("TTY toolkit", "https://ttytoolkit.org")
-# =>
-# TTY toolkit
+link = TTY::Link.new
 ```
 
-In cases when the terminal cannot support hyperlinks, an alternative is printed:
+Then use the [link_to](#23-link_to) method to print a hyperlink in the terminal:
 
 ```ruby
-# TTY toolkit -> https://ttytoolkit.org
+puts link.link_to("TTY Toolkit", "https://ttytoolkit.org")
+```
+
+This will output a clickable link in the
+[terminal supporting](#3-supported-terminals) hyperlinks:
+
+```shell
+TTY Toolkit
+```
+
+Or it will print a [plain](#214-plain) text version with a URL in unsupported
+terminals:
+
+```shell
+TTY Toolkit -> https://ttytoolkit.org
+```
+
+By default, **TTY::Link** uses the [link?](#22-link) method to detect whether
+the terminal supports hyperlinks:
+
+```ruby
+link.link?
+```
+
+Overwrite this automatic detection with the [:hyperlink](#213-hyperlink)
+keyword.
+
+For example, to always create hyperlinks in the terminal:
+
+```ruby
+link = TTY::Link.new(hyperlink: :always)
+```
+
+Alternatively, use the `TTY_LINK_HYPERLINK` environment variable to control
+hyperlink support detection. The variable takes precedence over the
+[:hyperlink](#213-hyperlink) keyword.
+
+Use the [:env](#211-env) keyword to overwrite any environment variables set
+in the terminal:
+
+```ruby
+link = TTY::Link.new(env: {"TTY_LINK_HYPERLINK" => "always"})
+```
+
+As a convenience, the [link?](#22-link) and [link_to](#23-link_to) methods
+are also available on the **TTY::Link** class. The methods accept all the
+configuration keywords.
+
+For example, to always output hyperlinks in the terminal:
+
+```ruby
+puts TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org", hyperlink: :always)
 ```
 
 ## 2. API
