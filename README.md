@@ -16,14 +16,11 @@
 [codeclimate]: https://codeclimate.com/github/piotrmurach/tty-link/maintainability
 [coverage]: https://coveralls.io/github/piotrmurach/tty-link
 
-> Hyperlinks in your terminal
+> Terminal hyperlinks support detection and generation.
 
-**TTY::Link** allows you to test whether a terminal supports hyperlinks and
-print them to the console. It is a component in
+**TTY::Link** detects whether the terminal supports hyperlinks and creates them
+ready for display in the console. It is a component of the
 [TTY toolkit](https://github.com/piotrmurach/tty).
-
-Terminal emulators such as `iTerm2` or `GNOME`, `XFCE` that use `VTE` widget
-support web style hyperlinks via `Ctrl+click` or `Cmd+click`.
 
 ## Installation
 
