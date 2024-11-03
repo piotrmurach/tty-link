@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.2.0] - unreleased
+## [v0.2.0] - 2024-11-03
 
 ### Added
 * Add the ability to configure the environment variables, hyperlink detection,
