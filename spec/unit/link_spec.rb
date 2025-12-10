@@ -84,6 +84,15 @@ RSpec.describe TTY::Link do
       end
     end
 
+    context "when Ghostty" do
+      it "supports links above the 1.0.0 version" do
+        env = {"TERM_PROGRAM" => "ghostty", "TERM_PROGRAM_VERSION" => "1.0.1"}
+        link = described_class.new(env: env, output: output)
+
+        expect(link.link?).to eq(true)
+      end
+    end
+
     context "when Hyper" do
       it "supports links above the 2.0.0 version" do
         env = {

@@ -1,5 +1,12 @@
 # Change log
 
+## Unreleased
+
+### Added
+
+* Add hyperlink support detection in Ghostty terminal
+  by Akshay Birajdar (@the-spectator).
+
 ## [v0.2.0] - 2024-11-03
 
 ### Added
