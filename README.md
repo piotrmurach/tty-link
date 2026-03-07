@@ -279,6 +279,7 @@ The **TTY::Link** supports hyperlink generation in the following terminals:
 * `Contour`
 * `DomTerm`
 * `foot`
+* `Ghostty`
 * `Hyper`
 * `iTerm2`
 * `JediTerm`
