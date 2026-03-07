@@ -5,7 +5,8 @@ module TTY
     # Raised to signal an error condition
     #
     # @api public
-    Error = Class.new(StandardError)
+    class Error < StandardError
+    end # Error
 
     # Raised when an abstract method is called
     #
