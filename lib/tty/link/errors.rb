@@ -19,6 +19,7 @@ module TTY
       # @api private
       MESSAGE = "the %<class_name>s class must implement " \
                 "the `%<method_name>s` method"
+      private_constant :MESSAGE
 
       # Create an {TTY::Link::AbstractMethodError} instance
       #
