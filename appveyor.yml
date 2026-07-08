@@ -1,6 +1,7 @@
 ---
 skip_commits:
   files:
+    - .github/**/*
     - "**/*.md"
 install:
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
