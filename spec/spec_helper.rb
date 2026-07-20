@@ -24,5 +24,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.max_formatted_output_length = nil
   end
+  config.mock_with :rspec
   config.disable_monkey_patching!
 end
