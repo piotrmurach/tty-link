@@ -12,8 +12,14 @@ module TTY
     #
     # @api public
     class AbstractMethodError < Error
+      # The error message template
+      #
+      # @return [String]
+      #
+      # @api private
       MESSAGE = "the %<class_name>s class must implement " \
                 "the `%<method_name>s` method"
+      private_constant :MESSAGE
 
       # Create an {TTY::Link::AbstractMethodError} instance
       #
@@ -29,7 +35,7 @@ module TTY
       def initialize(class_name, method_name)
         super(format(MESSAGE, class_name: class_name, method_name: method_name))
       end
-    end
+    end # AbstractMethodError
 
     # Raised when a parameter value doesn't match the allowed values
     #
