@@ -24,6 +24,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.max_formatted_output_length = nil
   end
-  config.mock_with :rspec
+  config.mock_with :rspec do |mocks|
+    mocks.verify_doubled_constant_names = true
+  end
   config.disable_monkey_patching!
 end
