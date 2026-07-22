@@ -20,6 +20,7 @@ require "bundler/setup"
 require "tty-link"
 
 RSpec.configure do |config|
+  config.default_formatter = :documentation if config.files_to_run.one?
   config.example_status_persistence_file_path = ".rspec_status"
   config.expect_with :rspec do |expectations|
     expectations.max_formatted_output_length = nil
