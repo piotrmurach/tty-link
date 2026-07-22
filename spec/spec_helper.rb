@@ -26,6 +26,7 @@ RSpec.configure do |config|
   end
   config.mock_with :rspec do |mocks|
     mocks.verify_doubled_constant_names = true
+    mocks.verify_partial_doubles = true
   end
   config.disable_monkey_patching!
 end
