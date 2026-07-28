@@ -4,15 +4,14 @@ if ENV["COVERAGE"] == "true"
   require "coveralls"
   require "simplecov"
 
-  SimpleCov.formatters = [
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-  ]
-
   SimpleCov.start do
     command_name "spec"
     add_filter "spec"
     enable_coverage :branch
+    formatters [
+      SimpleCov::Formatter::HTMLFormatter,
+      Coveralls::SimpleCov::Formatter
+    ]
   end
 end
 
