@@ -4,7 +4,7 @@ if ENV["COVERAGE"] == "true"
   require "coveralls"
   require "simplecov"
 
-  SimpleCov.start do
+  SimpleCov.configure do
     command_name "spec"
     enable_coverage :branch
     formatters [
@@ -12,6 +12,8 @@ if ENV["COVERAGE"] == "true"
       Coveralls::SimpleCov::Formatter
     ]
   end
+
+  SimpleCov.start
 end
 
 require "bundler/setup"
