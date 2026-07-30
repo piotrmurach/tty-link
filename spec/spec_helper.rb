@@ -11,6 +11,7 @@ if ENV["COVERAGE"] == "true"
       SimpleCov::Formatter::HTMLFormatter,
       Coveralls::SimpleCov::Formatter
     ]
+    project_name "TTY::Link"
   end
 
   SimpleCov.start
