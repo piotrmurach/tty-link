@@ -12,6 +12,7 @@ if ENV["COVERAGE"] == "true"
       Coveralls::SimpleCov::Formatter
     ]
     project_name "TTY::Link"
+    source_in_json false
   end
 
   SimpleCov.start
