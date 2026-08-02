@@ -9,3 +9,6 @@ task :coverage do
     ENV["COVERAGE"] = original
   end
 end
+
+desc "Alias for the coverage task"
+task cov: :coverage
