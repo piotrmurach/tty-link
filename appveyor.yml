@@ -4,6 +4,7 @@ skip_commits:
     - .github/**/*
     - "**/*.md"
     - "**/*.txt"
+build: off
 install:
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
   - gem install bundler -v "< 2.0"
@@ -12,7 +13,6 @@ before_test:
   - ruby -v
   - gem -v
   - bundle -v
-build: off
 test_script:
   - bundle exec rake ci
 environment:
