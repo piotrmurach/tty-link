@@ -8,10 +8,10 @@
 [![GitHub Actions CI status](https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml/badge.svg)][github_actions]
 [![AppVeyor test status](https://ci.appveyor.com/api/projects/status/4vb3w6wmr9w9vfp7?svg=true)][appveyor]
 [![Qlty maintainability rating](https://qlty.sh/gh/piotrmurach/projects/tty-link/maintainability.svg)][qlty]
-[![Coveralls coverage status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
+[![Coveralls coverage status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coveralls]
 
 [appveyor]: https://ci.appveyor.com/project/piotrmurach/tty-link
-[coverage]: https://coveralls.io/github/piotrmurach/tty-link
+[coveralls]: https://coveralls.io/github/piotrmurach/tty-link
 [github_actions]: https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml
 [qlty]: https://qlty.sh/gh/piotrmurach/projects/tty-link
 [rubygems]: https://rubygems.org/gems/tty-link
