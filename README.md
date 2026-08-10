@@ -8,7 +8,7 @@
 [![GitHub Actions CI status](https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml/badge.svg)][github_actions]
 [![AppVeyor test status](https://ci.appveyor.com/api/projects/status/4vb3w6wmr9w9vfp7?svg=true)][appveyor]
 [![Qlty maintainability rating](https://qlty.sh/gh/piotrmurach/projects/tty-link/maintainability.svg)][qlty]
-[![Coverage Status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
+[![Coveralls coverage status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
 
 [appveyor]: https://ci.appveyor.com/project/piotrmurach/tty-link
 [coverage]: https://coveralls.io/github/piotrmurach/tty-link
