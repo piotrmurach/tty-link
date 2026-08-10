@@ -5,7 +5,7 @@
 # TTY::Link
 
 [![RubyGems gem version](https://img.shields.io/gem/v/tty-link?color=brightgreen&logo=rubygems&logoColor=silver)][rubygems]
-[![Actions CI](https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml/badge.svg)][gh_actions_ci]
+[![GitHub Actions CI status](https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml/badge.svg)][gh_actions_ci]
 [![Build status](https://ci.appveyor.com/api/projects/status/4vb3w6wmr9w9vfp7?svg=true)][appveyor]
 [![Maintainability](https://api.codeclimate.com/v1/badges/3f8c368617c464238bf9/maintainability)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
