@@ -7,13 +7,13 @@
 [![RubyGems gem version](https://img.shields.io/gem/v/tty-link?color=brightgreen&logo=rubygems&logoColor=silver)][rubygems]
 [![GitHub Actions CI status](https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml/badge.svg)][github_actions]
 [![AppVeyor test status](https://ci.appveyor.com/api/projects/status/4vb3w6wmr9w9vfp7?svg=true)][appveyor]
-[![Maintainability](https://api.codeclimate.com/v1/badges/3f8c368617c464238bf9/maintainability)][codeclimate]
+[![Qlty maintainability rating](https://qlty.sh/gh/piotrmurach/projects/tty-link/maintainability.svg)][qlty]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/tty-link/badge.svg)][coverage]
 
 [appveyor]: https://ci.appveyor.com/project/piotrmurach/tty-link
-[codeclimate]: https://codeclimate.com/github/piotrmurach/tty-link/maintainability
 [coverage]: https://coveralls.io/github/piotrmurach/tty-link
 [github_actions]: https://github.com/piotrmurach/tty-link/actions/workflows/ci.yml
+[qlty]: https://qlty.sh/gh/piotrmurach/projects/tty-link
 [rubygems]: https://rubygems.org/gems/tty-link
 
 > Terminal hyperlinks support detection and generation.
