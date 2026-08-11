@@ -118,7 +118,9 @@ configuration keywords.
 For example, to always output hyperlinks in the terminal:
 
 ```ruby
-puts TTY::Link.link_to("TTY Toolkit", "https://ttytoolkit.org", hyperlink: :always)
+puts TTY::Link.link_to(
+  "TTY Toolkit", "https://ttytoolkit.org", hyperlink: :always
+)
 ```
 
 ## 2. API
