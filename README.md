@@ -20,7 +20,7 @@
 
 **TTY::Link** detects whether the terminal supports hyperlinks and creates them
 ready for display in the console. It is a component of the
-[TTY toolkit](https://github.com/piotrmurach/tty).
+[TTY Toolkit](https://github.com/piotrmurach/tty).
 
 ## Installation
 
