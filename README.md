@@ -262,15 +262,19 @@ allow future support.
 For example, to define the `id` attribute:
 
 ```ruby
-link.link_to("TTY Toolkit", "https://ttytoolkit.org", attrs: {id: "tty-toolkit"})
+link.link_to(
+  "TTY Toolkit", "https://ttytoolkit.org", attrs: {id: "tty-toolkit"}
+)
 ```
 
 To define many attributes such as `id`, `lang` and `title`:
 
 ```ruby
-link.link_to("TTY Toolkit", "https://ttytoolkit.org", attrs: {
-  id: "tty-toolkit", lang: "en", title: "Terminal Apps The Easy Way"
-})
+link.link_to(
+  "TTY Toolkit", "https://ttytoolkit.org", attrs: {
+    id: "tty-toolkit", lang: "en", title: "Terminal Apps The Easy Way"
+  }
+)
 ```
 
 ## 3. Supported Terminals
