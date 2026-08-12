@@ -294,7 +294,7 @@ The **TTY::Link** supports hyperlink generation in the following terminals:
 * `Rio`
 * `Tabby`
 * `Terminology`
-* `VSCode`
+* `VS Code`
 * `VTE (GNOME, Xfce, ROXTerm, Guake, sakura, Terminator)`
 * `WezTerm`
 * `Windows Terminal`
