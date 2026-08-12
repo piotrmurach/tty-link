@@ -199,7 +199,7 @@ link.link_to("TTY Toolkit", "https://ttytoolkit.org")
 This will create the following string from the default template:
 
 ```ruby
-"TTY toolkit -> https://ttytoolkit.org"
+"TTY Toolkit -> https://ttytoolkit.org"
 ```
 
 To change the default template and display links, for example, with the name
@@ -218,7 +218,7 @@ link.link_to("TTY Toolkit", "https://ttytoolkit.org")
 This will create the following string from the custom template:
 
 ```ruby
-"TTY toolkit (https://ttytoolkit.org)"
+"TTY Toolkit (https://ttytoolkit.org)"
 ```
 
 ### 2.2 link?
