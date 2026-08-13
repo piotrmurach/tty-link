@@ -29,7 +29,8 @@
 
 ## [v0.1.0] - 2019-08-10
 
-* Initial implementation and release
+### Added
+* Add the initial implementation
 
 [v0.2.0]: https://github.com/piotrmurach/tty-link/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/piotrmurach/tty-link/compare/v0.1.0...v0.1.1
