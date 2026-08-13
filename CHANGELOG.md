@@ -25,7 +25,11 @@
 ## [v0.1.1] - 2020-01-25
 
 ### Changed
-* Change gemspec to add metadata and remove test artefacts
+* Change the email address and the homepage URL in the gemspec
+
+### Removed
+* Remove the binary scripts, configuration files, Markdown templates
+  and Rake tasks from the build files in the gemspec
 
 ## [v0.1.0] - 2019-08-10
 
