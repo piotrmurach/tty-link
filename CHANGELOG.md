@@ -3,24 +3,25 @@
 ## [v0.2.0] - 2024-11-03
 
 ### Added
-* Add the ability to configure the environment variables, hyperlink detection,
-  output stream and plain URL template to the initialize method
-* Add the ability to configure the hyperlink detection with the environment
-  variable
-* Add the ability to create hyperlinks from the URL only to the link_to method
-* Add an attrs option to the link_to method to allow configuring URL attributes
-* Add hyperlinks support detection in Alacritty, Contour, DomTerm, foot, Hyper,
-  JediTerm, kitty, Konsole, mintty, Rio, Tabby, Terminology, VSCode, WezTerm
-  and Windows Terminal
+* Add the ability to configure the environment variables with the env option,
+  hyperlink support detection with the hyperlink option,
+  output stream with the output option
+  and plain URL template with the plain option to the initialize method
+* Add the ability to configure the hyperlink support detection
+  with the TTY_LINK_HYPERLINK environment variable
+* Add the ability to create hyperlinks using only the URL to the link_to method
+* Add the ability to configure the hyperlink attributes with the attrs option
+  to the link_to method
+* Add hyperlinks support detection for Alacritty, Contour, DomTerm, foot,
+  Hyper, JediTerm, kitty, Konsole, mintty, Rio, Tabby, Terminology, VS Code,
+  WezTerm and Windows Terminal
 
 ### Changed
-* Change the BEL and OSC control characters from Unicode to escape code
-* Change the OSC constant to OSC8 to include the hyperlink control number
+* Change the link_to method to use escape sequences for control characters
 * Change the TTY::Link module to a class
-* Change the TTY::Link class to remove the ESC constant
 * Change the TTY::Link class constants to be private
-* Change the TTY::Link class to check the iTerm program version presence
-* Change the support_link? method to rename to link?
+* Change the TTY::Link class to check whether the iTerm version exists
+* Change the TTY::Link class to rename the support_link? method to link?
 
 ## [v0.1.1] - 2020-01-25
 
