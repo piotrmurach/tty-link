@@ -8,6 +8,11 @@ require_relative "link/semantic_version"
 require_relative "link/terminals"
 require_relative "link/version"
 
+# The TTY Toolkit
+#
+# @see https://ttytoolkit.org
+#
+# @api public
 module TTY
   # Responsible for detecting and generating terminal hyperlinks
   #
