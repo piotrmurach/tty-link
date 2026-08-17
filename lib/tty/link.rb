@@ -26,7 +26,7 @@ module TTY
     DEFAULT_TEMPLATE = ":name -> :url"
     private_constant :DEFAULT_TEMPLATE
 
-    # The hyperlink environment variable name
+    # The hyperlink support detection environment variable name
     #
     # @return [String]
     #
