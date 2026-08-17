@@ -18,7 +18,7 @@ module TTY
   #
   # @api public
   class Link
-    # The default plain URL template
+    # The default plain hyperlink template
     #
     # @return [String]
     #
