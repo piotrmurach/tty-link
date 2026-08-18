@@ -136,11 +136,11 @@ module TTY
     # @param [ENV, Hash{String => String}] env
     #   the environment variables
     # @param [String, Symbol] hyperlink
-    #   the hyperlink detection out of always, auto or never
+    #   the hyperlink support detection out of always, auto or never
     # @param [IO] output
     #   the output stream, defaults to $stdout
     # @param [String] plain
-    #   the plain URL template
+    #   the plain hyperlink template
     #
     # @api public
     def initialize(env: ENV, hyperlink: :auto, output: $stdout,
