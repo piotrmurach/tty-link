@@ -273,12 +273,12 @@ module TTY
     # Create a {TTY::Link::PlainLink} instance
     #
     # @example
-    #   plain_link("TTY Toolkit", "https://ttytoolkit.org")
+    #   link.plain_link("TTY Toolkit", "https://ttytoolkit.org")
     #
     # @param [String] name
-    #   the URL name
+    #   the hyperlink name
     # @param [String] url
-    #   the URL target
+    #   the hyperlink URL
     #
     # @return [TTY::Link::PlainLink]
     #
