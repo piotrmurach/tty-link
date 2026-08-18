@@ -239,7 +239,7 @@ module TTY
       ANSILink.new(name, url, attrs)
     end
 
-    # Read the hyperlink environment variable
+    # Read the hyperlink support detection environment variable
     #
     # @example
     #   link.hyperlink_env
