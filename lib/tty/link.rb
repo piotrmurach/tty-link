@@ -168,11 +168,11 @@ module TTY
     #                attrs: {id: "tty-toolkit", title: "TTY Toolkit"})
     #
     # @param [String] name
-    #   the name for the URL
+    #   the hyperlink name
     # @param [String, nil] url
-    #   the URL target
+    #   the hyperlink URL
     # @param [Hash{Symbol => String}] attrs
-    #   the URL attributes
+    #   the hyperlink attributes
     #
     # @return [String]
     #
