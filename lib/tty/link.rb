@@ -258,12 +258,12 @@ module TTY
     #   link.hyperlink_parameter(:always)
     #
     # @param [String, Symbol] hyperlink
-    #   the hyperlink detection out of always, auto or never
+    #   the hyperlink support detection out of always, auto or never
     #
     # @return [TTY::Link::HyperlinkParameter]
     #
     # @raise [TTY::Link::ValueError]
-    #   the value isn't always, auto or never
+    #   the value is not always, auto or never
     #
     # @api private
     def hyperlink_parameter(hyperlink)
