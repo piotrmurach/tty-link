@@ -63,19 +63,19 @@ module TTY
     #                     plain: ":name (:url)")
     #
     # @param [String] name
-    #   the name for the URL
+    #   the hyperlink name
     # @param [String, nil] url
-    #   the URL target
+    #   the hyperlink URL
     # @param [Hash{Symbol => String}] attrs
-    #   the URL attributes
+    #   the hyperlink attributes
     # @param [ENV, Hash{String => String}] env
     #   the environment variables
     # @param [String, Symbol] hyperlink
-    #   the hyperlink detection out of always, auto or never
+    #   the hyperlink support detection out of always, auto or never
     # @param [IO] output
     #   the output stream, defaults to $stdout
     # @param [String] plain
-    #   the plain URL template
+    #   the plain hyperlink template
     #
     # @return [String]
     #
