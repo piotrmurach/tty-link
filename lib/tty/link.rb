@@ -220,14 +220,15 @@ module TTY
     # Create an {TTY::Link::ANSILink} instance
     #
     # @example
-    #   ansi_link("TTY Toolkit", "https://ttytoolkit.org", {id: "tty-tookit"})
+    #   link.ansi_link("TTY Toolkit", "https://ttytoolkit.org",
+    #                  {id: "tty-toolkit"})
     #
     # @param [String] name
-    #   the URL name
+    #   the hyperlink name
     # @param [String] url
-    #   the URL target
+    #   the hyperlink URL
     # @param [Hash{Symbol => String}] attrs
-    #   the URL attributes
+    #   the hyperlink attributes
     #
     # @return [TTY::Link::ANSILink]
     #
