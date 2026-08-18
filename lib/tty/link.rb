@@ -303,7 +303,7 @@ module TTY
       end
     end
 
-    # Detect the terminal device
+    # Detect whether the output is a terminal
     #
     # @example
     #   link.tty?
