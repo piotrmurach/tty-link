@@ -289,7 +289,7 @@ module TTY
       PlainLink.new(name, url, @plain)
     end
 
-    # Terminals for detecting hyperlink support
+    # The terminals for detecting hyperlink support
     #
     # @example
     #   link.terminals
