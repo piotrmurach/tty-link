@@ -2,7 +2,7 @@
 
 module TTY
   class Link
-    # Responsible for converting a URL to an ANSI-controlled terminal link
+    # Responsible for converting a URL to an ANSI hyperlink escape sequence
     #
     # @api private
     class ANSILink
