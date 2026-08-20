@@ -30,7 +30,7 @@ module TTY
       BEL = "\a"
       private_constant :BEL
 
-      # The hyperlink operating system command code
+      # The hyperlink operating system command opening delimiter
       #
       # @return [String]
       #
