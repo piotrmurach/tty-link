@@ -46,18 +46,19 @@ module TTY
       SEP = ";"
       private_constant :SEP
 
-      # Create an {TTY::Link::ANSILink} instance
+      # Create a {TTY::Link::ANSILink} instance
       #
       # @example
       #   ansi_link = TTY::Link::ANSILink.new(
-      #     "TTY Toolkit", "https://ttytoolkit.org", {id: "tty-toolkit"})
+      #     "TTY Toolkit", "https://ttytoolkit.org", {id: "tty-toolkit"}
+      #   )
       #
       # @param [String] name
-      #   the URL name
+      #   the hyperlink name
       # @param [String] url
-      #   the URL target
+      #   the hyperlink URL
       # @param [Hash{Symbol => String}] attrs
-      #   the URL attributes
+      #   the hyperlink attributes
       #
       # @api public
       def initialize(name, url, attrs)
