@@ -67,7 +67,7 @@ module TTY
         @attrs = attrs
       end
 
-      # Convert this link to an ANSI-controlled string
+      # Convert this link to an ANSI hyperlink escape sequence
       #
       # @example
       #   ansi_link.to_s
