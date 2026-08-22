@@ -83,15 +83,16 @@ module TTY
 
       private
 
-      # Convert the attributes hash to a string list
+      # Convert the attributes into an ANSI hyperlink format
       #
       # @example
       #   ansi_link.convert_to_attributes(
-      #     {id: "tty-toolkit", title: "TTY Toolkit"})
+      #     {id: "tty-toolkit", title: "TTY Toolkit"}
+      #   )
       #   # => "id=tty-toolkit:title=TTY Toolkit"
       #
       # @param [Hash{Symbol => String}] attrs
-      #   the attributes to convert to a string list
+      #   the hyperlink attributes
       #
       # @return [String]
       #
