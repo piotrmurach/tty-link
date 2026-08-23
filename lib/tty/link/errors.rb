@@ -8,7 +8,7 @@ module TTY
     class Error < StandardError
     end # Error
 
-    # Raised when an abstract method is called
+    # Raised when a class does not implement an abstract method
     #
     # @api public
     class AbstractMethodError < Error
