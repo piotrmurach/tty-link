@@ -12,6 +12,11 @@ module TTY
     #
     # @api public
     class AbstractMethodError < Error
+      # The error message template
+      #
+      # @return [String]
+      #
+      # @api private
       MESSAGE = "the %<class_name>s class must implement " \
                 "the `%<method_name>s` method"
 
