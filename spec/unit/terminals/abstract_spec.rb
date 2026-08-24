@@ -13,7 +13,7 @@ RSpec.describe TTY::Link::Terminals::Abstract do
         terminal.link?
       }.to raise_error(
         TTY::Link::AbstractMethodError,
-        "the Terminal class must implement the name? method"
+        "the Terminal class must implement the name? method."
       )
     end
 
@@ -29,7 +29,7 @@ RSpec.describe TTY::Link::Terminals::Abstract do
         terminal.link?
       }.to raise_error(
         TTY::Link::AbstractMethodError,
-        "the Terminal class must implement the version? method"
+        "the Terminal class must implement the version? method."
       )
     end
 
