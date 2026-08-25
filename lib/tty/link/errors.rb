@@ -21,10 +21,10 @@ module TTY
                 "the %<method_name>s method."
       private_constant :MESSAGE
 
-      # Create an {TTY::Link::AbstractMethodError} instance
+      # Create a {TTY::Link::AbstractMethodError} instance
       #
       # @example
-      #   TTY::Link::AbstractMethodError.new("Terminal", "name?")
+      #   TTY::Link::AbstractMethodError.new("Terminal", :name?)
       #
       # @param [String] class_name
       #   the class name
