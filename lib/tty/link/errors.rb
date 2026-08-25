@@ -35,7 +35,7 @@ module TTY
       def initialize(class_name, method_name)
         super(format(MESSAGE, class_name: class_name, method_name: method_name))
       end
-    end
+    end # AbstractMethodError
 
     # Raised when a parameter value doesn't match the allowed values
     #
