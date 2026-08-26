@@ -37,7 +37,7 @@ module TTY
       end
     end # AbstractMethodError
 
-    # Raised when a parameter value doesn't match the allowed values
+    # Raised when a parameter value is not one of the allowed values
     #
     # @api public
     class ValueError < Error
