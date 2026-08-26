@@ -23,7 +23,7 @@ module TTY
       #   the parameter value
       #
       # @raise [TTY::Link::ValueError]
-      #   the value isn't always, auto or never
+      #   the value is not one of always, auto or never
       #
       # @api public
       def initialize(value)
