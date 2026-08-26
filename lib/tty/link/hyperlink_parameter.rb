@@ -77,12 +77,12 @@ module TTY
       #   hyperlink_parameter.validate(:invalid)
       #
       # @param [Object] value
-      #   the value to validate
+      #   the parameter value
       #
       # @return [String, Symbol]
       #
       # @raise [TTY::Link::ValueError]
-      #   the value isn't always, auto or never
+      #   the value is not one of always, auto or never
       #
       # @api private
       def validate(value)
