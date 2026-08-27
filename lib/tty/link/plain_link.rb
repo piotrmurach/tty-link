@@ -2,7 +2,7 @@
 
 module TTY
   class Link
-    # Responsible for converting a URL to a plain terminal link
+    # Responsible for converting a URL to a plain hyperlink
     #
     # @api private
     class PlainLink
