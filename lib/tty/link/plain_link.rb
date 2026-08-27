@@ -18,14 +18,15 @@ module TTY
       #
       # @example
       #   plain_link = TTY::Link::PlainLink.new(
-      #     "TTY Toolkit", "https://ttytoolkit.org", ":name (:url)")
+      #     "TTY Toolkit", "https://ttytoolkit.org", ":name (:url)"
+      #   )
       #
       # @param [String] name
-      #   the URL name
+      #   the hyperlink name
       # @param [String] url
-      #   the URL target
+      #   the hyperlink URL
       # @param [String] template
-      #   the URL replacement template
+      #   the hyperlink template
       #
       # @api public
       def initialize(name, url, template)
