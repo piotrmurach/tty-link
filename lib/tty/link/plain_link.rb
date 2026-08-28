@@ -35,7 +35,7 @@ module TTY
         @template = template
       end
 
-      # Convert this link to a plain string
+      # Convert this link to a plain hyperlink format
       #
       # @example
       #   plain_link.to_s
