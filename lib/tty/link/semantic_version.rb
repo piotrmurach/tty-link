@@ -50,7 +50,7 @@ module TTY
       #   TTY::Link::SemanticVersion.from("1-2-3", separator: "-")
       #
       # @param [Array<Integer, String>] version
-      #   the version to convert to a semantic version
+      #   the version value
       # @param [String] separator
       #   the version separator
       #
