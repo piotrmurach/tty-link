@@ -68,10 +68,10 @@ module TTY
       end
       singleton_class.send(:alias_method, :[], :from)
 
-      # Convert a string version to an array
+      # Convert a string version to an array version
       #
       # @example
-      #   TTY::Link::SemanticVersion.from("1234")
+      #   TTY::Link::SemanticVersion.convert_to_array("1234")
       #   # => ["0", "12", "34"]
       #
       # @example
@@ -83,7 +83,7 @@ module TTY
       #   # => ["1", "2", "3"]
       #
       # @param [String] version
-      #   the version to convert to an array
+      #   the version value
       # @param [String] separator
       #   the version separator
       #
