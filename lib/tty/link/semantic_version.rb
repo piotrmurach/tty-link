@@ -99,10 +99,11 @@ module TTY
       end
       private_class_method :convert_to_array
 
-      # The major number
+      # The major version
       #
       # @example
       #   semantic_version.major
+      #   # => 1
       #
       # @return [Integer]
       #
