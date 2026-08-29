@@ -110,10 +110,11 @@ module TTY
       # @api public
       attr_reader :major
 
-      # The minor number
+      # The minor version
       #
       # @example
       #   semantic_version.minor
+      #   # => 2
       #
       # @return [Integer]
       #
