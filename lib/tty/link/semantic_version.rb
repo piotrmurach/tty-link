@@ -121,10 +121,11 @@ module TTY
       # @api public
       attr_reader :minor
 
-      # The patch number
+      # The patch version
       #
       # @example
       #   semantic_version.patch
+      #   # => 3
       #
       # @return [Integer]
       #
