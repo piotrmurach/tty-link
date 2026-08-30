@@ -135,14 +135,14 @@ module TTY
       # Create a {TTY::Link::SemanticVersion} instance
       #
       # @example
-      #   TTY::Link::SemanticVersion.new(1, 2, 3)
+      #   semantic_version = TTY::Link::SemanticVersion.from(1, 2, 3)
       #
       # @param [Integer] major
-      #   the major number
+      #   the major version
       # @param [Integer] minor
-      #   the minor number
+      #   the minor version
       # @param [Integer] patch
-      #   the patch number
+      #   the patch version
       #
       # @api private
       def initialize(major, minor, patch)
