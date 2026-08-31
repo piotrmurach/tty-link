@@ -155,16 +155,20 @@ module TTY
       # Compare this semantic version with another object
       #
       # @example
-      #   semantic_version >= other
+      #   semantic_version <=> TTY::Link::SemanticVersion.from(1, 2, 3)
+      #   # => 0
+      #
+      # @example
+      #   semantic_version <=> [1, 2, 3]
+      #   # => nil
       #
       # @param [Object] other
-      #   the other object to compare with
+      #   the other object
       #
       # @return [Integer, nil]
-      #   Return negative, zero, or positive number when
-      #   this semantic version is less than, equal to, or
-      #   greater than other semantic version. Return nil
-      #   when the other object is not a semantic version.
+      #   Return -1, 0, or 1 when this semantic version is less than,
+      #   equal to, or greater than the other semantic version.
+      #   Return nil when the other object is not a semantic version.
       #
       # @api public
       def <=>(other)
