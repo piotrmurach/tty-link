@@ -195,10 +195,11 @@ module TTY
         [self.class, @major, @minor, @patch].hash
       end
 
-      # Convert this semantic version to a string
+      # Convert this semantic version to the release version format
       #
       # @example
       #   semantic_version.inspect
+      #   # => "1.2.3"
       #
       # @return [String]
       #
