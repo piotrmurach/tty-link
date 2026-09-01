@@ -183,7 +183,7 @@ module TTY
         @patch <=> other.patch
       end
 
-      # Generate hash value for this semantic version
+      # Generate a hash for this semantic version
       #
       # @example
       #   semantic_version.hash
