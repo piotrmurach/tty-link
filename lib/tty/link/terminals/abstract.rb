@@ -5,10 +5,11 @@ require_relative "../errors"
 module TTY
   class Link
     module Terminals
-      # Responsible for providing common terminal detection
+      # Responsible for detecting hyperlink support in a terminal
       #
-      # @abstract Override {#name?} and {#version?} to implement
-      #           terminal hyperlinks detection
+      # @abstract
+      #   Override the {#name?} and {#version?} methods
+      #   to implement hyperlink support detection
       #
       # @api private
       class Abstract
