@@ -66,6 +66,6 @@ module TTY
       private_class_method :require_terminals
 
       require_terminals
-    end
+    end # Terminals
   end # Link
 end # TTY
