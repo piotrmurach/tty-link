@@ -51,10 +51,14 @@ module TTY
         end
         private_class_method :inherited
 
-        # Create an {TTY::Link::Terminals::Abstract} instance
+        # Create a {TTY::Link::Terminals::Abstract} instance
         #
         # @example
-        #   terminal = TTY::Link::Terminals::Abstract.new(SemanticVersion, ENV)
+        #   class Terminal < TTY::Link::Terminals::Abstract
+        #     # ...
+        #   end
+        #
+        #   terminal = Terminal.new(SemanticVersion, ENV)
         #
         # @param [TTY::Link::SemanticVersion] semantic_version
         #   the semantic version creator
