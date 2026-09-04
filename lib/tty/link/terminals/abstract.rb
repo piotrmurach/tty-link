@@ -135,10 +135,10 @@ module TTY
         #   terminal.semantic_version("1.2.3")
         #
         # @param [Array<Integer, String>] version
-        #   the version to convert to a semantic version
+        #   the version value
         # @param [Hash{Symbol => String}] options
-        #   the options to convert to a semantic version
-        # @option options [String] :separator
+        #   the conversion options
+        # @option options [String] separator
         #   the version separator
         #
         # @return [TTY::Link::SemanticVersion]
