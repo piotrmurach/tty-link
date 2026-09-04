@@ -71,7 +71,7 @@ module TTY
           @env = env
         end
 
-        # Detect a terminal hyperlink support
+        # Detect whether this terminal supports hyperlinks
         #
         # @example
         #   terminal.link?
