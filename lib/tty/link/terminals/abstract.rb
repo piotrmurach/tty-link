@@ -86,13 +86,13 @@ module TTY
 
         protected
 
-        # Detect a terminal name
+        # Detect whether this terminal name matches
         #
         # @example
         #   terminal.name?
         #
         # @raise [TTY::Link::AbstractMethodError]
-        #   the class doesn't implement the name? method
+        #   the class does not implement the name? method
         #
         # @abstract
         #
