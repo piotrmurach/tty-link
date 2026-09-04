@@ -101,13 +101,13 @@ module TTY
           raise AbstractMethodError.new(self.class.name, __method__)
         end
 
-        # Detect whether a terminal version supports terminal hyperlinks
+        # Detect whether this terminal version is compatible
         #
         # @example
         #   terminal.version?
         #
         # @raise [TTY::Link::AbstractMethodError]
-        #   the class doesn't implement the version? method
+        #   the class does not implement the version? method
         #
         # @abstract
         #
