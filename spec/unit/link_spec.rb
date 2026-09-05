@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe TTY::Link do
-  let(:output) { double(:output, tty?: true) }
+  let(:output) { instance_double(IO, tty?: true) }
 
   describe ".link?" do
     context "when non TTY device" do
