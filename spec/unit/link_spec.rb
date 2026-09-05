@@ -4,7 +4,7 @@ RSpec.describe TTY::Link do
   let(:output) { instance_double(IO, tty?: true) }
 
   describe ".link?" do
-    context "when non TTY device" do
+    context "when the output is not a terminal" do
       it "doesn't support links" do
         allow(output).to receive(:tty?).and_return(false)
 
@@ -12,14 +12,14 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when unknown terminal" do
+    context "when no supported terminal is detected" do
       it "doesn't support links" do
         expect(described_class.link?(env: {}, output: output)).to eq(false)
       end
     end
 
-    context "when iTerm" do
-      it "supports a terminal program name with a version number" do
+    context "when iTerm is detected" do
+      it "supports links" do
         env = {
           "TERM_PROGRAM" => "iTerm.app",
           "TERM_PROGRAM_VERSION" => "4.3.2"
@@ -31,7 +31,7 @@ RSpec.describe TTY::Link do
   end
 
   describe "#link?" do
-    context "when non TTY device" do
+    context "when the output is not a terminal" do
       it "doesn't support links" do
         allow(output).to receive(:tty?).and_return(false)
 
@@ -39,13 +39,13 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when unknown terminal" do
+    context "when no supported terminal is detected" do
       it "doesn't support links" do
         expect(described_class.new(env: {}, output: output).link?).to eq(false)
       end
     end
 
-    context "when Alacritty" do
+    context "when Alacritty is detected" do
       it "supports links on any version" do
         env = {"TERM" => "alacritty"}
         link = described_class.new(env: env, output: output)
@@ -54,8 +54,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Contour" do
-      it "supports a terminal name with a version number" do
+    context "when Contour is detected" do
+      it "supports links from version 0.1.0" do
         env = {
           "TERMINAL_NAME" => "contour",
           "TERMINAL_VERSION_TRIPLE" => "0.1.0"
@@ -66,8 +66,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when DomTerm" do
-      it "supports links above the 1.0.2 version" do
+    context "when DomTerm is detected" do
+      it "supports links from version 1.0.2" do
         env = {"DOMTERM" => "QtDomTerm;version=1.0.2;tty=/dev/pts/1"}
         link = described_class.new(env: env, output: output)
 
@@ -75,7 +75,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Foot" do
+    context "when Foot is detected" do
       it "supports links on any version" do
         env = {"TERM" => "foot"}
         link = described_class.new(env: env, output: output)
@@ -84,8 +84,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Hyper" do
-      it "supports links above the 2.0.0 version" do
+    context "when Hyper is detected" do
+      it "supports links from version 2.0.0" do
         env = {
           "TERM_PROGRAM" => "Hyper",
           "TERM_PROGRAM_VERSION" => "3.4.1"
@@ -96,8 +96,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when iTerm" do
-      it "supports a terminal program name with a version number" do
+    context "when iTerm is detected" do
+      it "supports links from version 3.1.0" do
         env = {
           "TERM_PROGRAM" => "iTerm.app",
           "TERM_PROGRAM_VERSION" => "3.1.0"
@@ -108,7 +108,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when JediTerm" do
+    context "when JediTerm is detected" do
       it "supports links on any version" do
         env = {"TERMINAL_EMULATOR" => "JetBrains-JediTerm"}
         link = described_class.new(env: env, output: output)
@@ -117,7 +117,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when kitty" do
+    context "when kitty is detected" do
       it "supports links on any version" do
         env = {"TERM" => "xterm-kitty"}
         link = described_class.new(env: env, output: output)
@@ -126,8 +126,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Konsole" do
-      it "supports links above the 20.12.0 version" do
+    context "when Konsole is detected" do
+      it "supports links from version 20.12.0" do
         env = {"KONSOLE_VERSION" => "20.12.0"}
         link = described_class.new(env: env, output: output)
 
@@ -135,8 +135,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when mintty" do
-      it "supports links above the 2.9.7 version" do
+    context "when mintty is detected" do
+      it "supports links from version 2.9.7" do
         env = {
           "TERM_PROGRAM" => "mintty",
           "TERM_PROGRAM_VERSION" => "2.9.7"
@@ -147,8 +147,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Rio" do
-      it "supports links above the 0.0.28 version" do
+    context "when Rio is detected" do
+      it "supports links from version 0.0.28" do
         env = {
           "TERM_PROGRAM" => "rio",
           "TERM_PROGRAM_VERSION" => "0.0.28"
@@ -159,7 +159,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Tabby" do
+    context "when Tabby is detected" do
       it "supports links on any version" do
         env = {"TERM_PROGRAM" => "Tabby"}
         link = described_class.new(env: env, output: output)
@@ -168,8 +168,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Terminology" do
-      it "supports links above the 1.3.0 version" do
+    context "when Terminology is detected" do
+      it "supports links from version 1.3.0" do
         env = {
           "TERM_PROGRAM" => "terminology",
           "TERM_PROGRAM_VERSION" => "1.3.0"
@@ -180,8 +180,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when VSCode" do
-      it "supports links above the 1.72.0 version" do
+    context "when VS Code is detected" do
+      it "supports links from version 1.72.0" do
         env = {
           "TERM_PROGRAM" => "vscode",
           "TERM_PROGRAM_VERSION" => "1.72.0"
@@ -192,8 +192,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when VTE" do
-      it "supports links above the 0.50.1 version" do
+    context "when VTE is detected" do
+      it "supports links from version 0.50.1" do
         env = {"VTE_VERSION" => "5001"}
         link = described_class.new(env: env, output: output)
 
@@ -201,8 +201,8 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when WezTerm" do
-      it "supports links above the 20180218 version" do
+    context "when WezTerm is detected" do
+      it "supports links from version 20180218" do
         env = {
           "TERM_PROGRAM" => "WezTerm",
           "TERM_PROGRAM_VERSION" => "20180218-123-abc"
@@ -213,7 +213,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when Windows Terminal" do
+    context "when Windows Terminal is detected" do
       it "supports links on any version" do
         env = {"WT_SESSION" => "123-abc"}
         link = described_class.new(env: env, output: output)
