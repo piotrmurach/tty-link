@@ -5,10 +5,11 @@ RSpec.describe TTY::Link do
 
   describe ".link?" do
     context "when the output is not a terminal" do
-      it "doesn't support links" do
+      it "doesn't support links on a compatible terminal" do
+        env = {"TERM" => "alacritty"}
         allow(output).to receive(:tty?).and_return(false)
 
-        expect(described_class.link?(output: output)).to eq(false)
+        expect(described_class.link?(env: env, output: output)).to eq(false)
       end
     end
 
