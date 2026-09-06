@@ -88,7 +88,7 @@ RSpec.describe TTY::Link do
       it "supports links from version 2.0.0" do
         env = {
           "TERM_PROGRAM" => "Hyper",
-          "TERM_PROGRAM_VERSION" => "3.4.1"
+          "TERM_PROGRAM_VERSION" => "2.0.0"
         }
         link = described_class.new(env: env, output: output)
 
