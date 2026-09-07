@@ -4,6 +4,18 @@ RSpec.describe TTY::Link do
   let(:output) { instance_double(IO, tty?: true) }
 
   describe ".link?" do
+    context "when no keyword arguments are provided" do
+      it "forwards the default values to an instance" do
+        instance = instance_double(described_class, link?: true)
+        allow(described_class).to receive(:new).and_return(instance)
+
+        described_class.link?
+
+        expect(described_class).to have_received(:new)
+          .with(env: ENV, output: $stdout)
+      end
+    end
+
     context "when the output is not a terminal" do
       it "doesn't support links on a compatible terminal" do
         env = {"TERM" => "alacritty"}
