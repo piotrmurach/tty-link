@@ -44,6 +44,16 @@ RSpec.describe TTY::Link do
   end
 
   describe "#link?" do
+    context "when the keyword argument default values are used" do
+      it "defaults the env keyword argument to ENV" do
+        allow(ENV).to receive(:[]).and_return(nil)
+
+        described_class.new(output: output).link?
+
+        expect(ENV).to have_received(:[]).at_least(:once)
+      end
+    end
+
     context "when the output is not a terminal" do
       it "doesn't support links on a compatible terminal" do
         env = {"TERM" => "alacritty"}
