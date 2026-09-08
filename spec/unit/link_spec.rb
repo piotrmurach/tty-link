@@ -52,6 +52,14 @@ RSpec.describe TTY::Link do
 
         expect(ENV).to have_received(:[]).at_least(:once)
       end
+
+      it "defaults the output keyword argument to $stdout" do
+        allow($stdout).to receive(:tty?).and_return(false)
+
+        described_class.new(env: {}).link?
+
+        expect($stdout).to have_received(:tty?).once
+      end
     end
 
     context "when the output is not a terminal" do
