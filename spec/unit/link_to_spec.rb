@@ -10,8 +10,8 @@ RSpec.describe TTY::Link do
   let(:output) { instance_double(IO, tty?: true) }
 
   describe ".link_to" do
-    context "when unsupported terminal" do
-      it "createa a terminal link replacement" do
+    context "when the terminal is unsupported" do
+      it "creates a terminal link replacement" do
         linked = described_class.link_to(
           "TTY Toolkit", "https://ttytoolkit.org", env: {}, output: output
         )
@@ -29,7 +29,7 @@ RSpec.describe TTY::Link do
         )
       end
 
-      context "with :attrs option" do
+      context "with the attrs keyword argument" do
         it "creates a terminal link replacement excluding any attributes" do
           linked = described_class.link_to(
             "TTY Toolkit", "https://ttytoolkit.org", attrs: {
@@ -41,7 +41,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :hyperlink option" do
+      context "with the hyperlink keyword argument" do
         it "creates a terminal link with an always value" do
           linked = described_class.link_to(
             "TTY Toolkit", "https://ttytoolkit.org",
@@ -81,7 +81,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with hyperlink environment variable" do
+      context "with the hyperlink environment variable" do
         it "creates a terminal link with an always value" do
           env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "always"}
           linked = described_class.link_to(
@@ -126,7 +126,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :plain option" do
+      context "with the plain keyword argument" do
         it "creates a terminal link replacement with name and url tokens" do
           linked = described_class.link_to(
             "TTY Toolkit", "https://ttytoolkit.org",
@@ -165,7 +165,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when supported terminal" do
+    context "when the terminal is supported" do
       it "creates a terminal link" do
         linked = described_class.link_to(
           "TTY Toolkit", "https://ttytoolkit.org", env: env, output: output
@@ -185,7 +185,7 @@ RSpec.describe TTY::Link do
         )
       end
 
-      context "with :attrs option" do
+      context "with the attrs keyword argument" do
         it "creates a terminal link with an id attribute" do
           linked = described_class.link_to(
             "TTY Toolkit", "https://ttytoolkit.org",
@@ -211,7 +211,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :hyperlink option" do
+      context "with the hyperlink keyword argument" do
         it "creates a terminal link with an always value" do
           linked = described_class.link_to(
             "TTY Toolkit", "https://ttytoolkit.org",
@@ -253,7 +253,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with hyperlink environment variable" do
+      context "with the hyperlink environment variable" do
         it "creates a terminal link with an always value" do
           env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "always")
           linked = described_class.link_to(
@@ -300,7 +300,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :plain option" do
+      context "with the plain keyword argument" do
         it "creates a terminal link excluding a plain template" do
           linked = described_class.link_to(
             "TTY Toolkit", "https://ttytoolkit.org",
@@ -316,7 +316,7 @@ RSpec.describe TTY::Link do
   end
 
   describe "#link_to" do
-    context "when unsupported terminal" do
+    context "when the terminal is unsupported" do
       it "creates a terminal link replacement" do
         link = described_class.new(env: {}, output: output)
         linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
@@ -333,7 +333,7 @@ RSpec.describe TTY::Link do
         )
       end
 
-      context "with :attrs option" do
+      context "with the attrs keyword argument" do
         it "creates a terminal link replacement excluding any attributes" do
           link = described_class.new(env: {}, output: output)
           linked = link.link_to(
@@ -346,7 +346,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :hyperlink option" do
+      context "with the hyperlink keyword argument" do
         it "creates a terminal link with an always value" do
           link = described_class.new(
             env: {}, hyperlink: :always, output: output
@@ -379,7 +379,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with hyperlink environment variable" do
+      context "with the hyperlink environment variable" do
         it "creates a terminal link with an always value" do
           env_with_hyperlink = {"TTY_LINK_HYPERLINK" => "always"}
           link = described_class.new(env: env_with_hyperlink, output: output)
@@ -415,7 +415,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :plain option" do
+      context "with the plain keyword argument" do
         it "creates a terminal link replacement with name and url tokens" do
           link = described_class.new(
             env: {}, output: output, plain: ":name (:url)"
@@ -448,7 +448,7 @@ RSpec.describe TTY::Link do
       end
     end
 
-    context "when supported terminal" do
+    context "when the terminal is supported" do
       it "creates a terminal link" do
         link = described_class.new(env: env, output: output)
         linked = link.link_to("TTY Toolkit", "https://ttytoolkit.org")
@@ -466,7 +466,7 @@ RSpec.describe TTY::Link do
         )
       end
 
-      context "with :attrs option" do
+      context "with the attrs keyword argument" do
         it "creates a terminal link with an id attribute" do
           link = described_class.new(env: env, output: output)
           linked = link.link_to(
@@ -493,7 +493,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :hyperlink option" do
+      context "with the hyperlink keyword argument" do
         it "creates a terminal link with an always value" do
           link = described_class.new(
             env: env, hyperlink: :always, output: output
@@ -532,7 +532,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with hyperlink environment variable" do
+      context "with the hyperlink environment variable" do
         it "creates a terminal link with an always value" do
           env_with_hyperlink = env.merge("TTY_LINK_HYPERLINK" => "always")
           link = described_class.new(env: env_with_hyperlink, output: output)
@@ -570,7 +570,7 @@ RSpec.describe TTY::Link do
         end
       end
 
-      context "with :plain option" do
+      context "with the plain keyword argument" do
         it "creates a terminal link excluding a plain template" do
           link = described_class.new(
             env: env, output: output, plain: ":name (:url)"
