@@ -7,7 +7,7 @@ RSpec.describe TTY::Link do
       "TERM_PROGRAM_VERSION" => "4.3.2"
     }
   }
-  let(:output) { double(:output, tty?: true) }
+  let(:output) { instance_double(IO, tty?: true) }
 
   describe ".link_to" do
     context "when unsupported terminal" do
