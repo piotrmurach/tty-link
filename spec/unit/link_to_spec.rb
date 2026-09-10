@@ -10,6 +10,23 @@ RSpec.describe TTY::Link do
   let(:output) { instance_double(IO, tty?: true) }
 
   describe ".link_to" do
+    context "when no keyword arguments are provided" do
+      it "forwards the default values to an instance" do
+        instance = instance_double(described_class, link_to: "")
+        allow(described_class).to receive(:new).and_return(instance)
+
+        described_class.link_to("TTY Toolkit", "https://ttytoolkit.org")
+
+        expect(described_class).to have_received(:new)
+          .with(
+            env: ENV,
+            hyperlink: :auto,
+            output: $stdout,
+            plain: ":name -> :url"
+          )
+      end
+    end
+
     context "when the terminal is unsupported" do
       it "creates a terminal link replacement" do
         linked = described_class.link_to(
