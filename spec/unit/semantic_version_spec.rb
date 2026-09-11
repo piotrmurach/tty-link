@@ -39,7 +39,7 @@ RSpec.describe TTY::Link::SemanticVersion do
       expect(sem_ver).to have_attributes({major: 1, minor: 2, patch: 0})
     end
 
-    it "creates a semantic version from single integer" do
+    it "creates a semantic version from a single integer" do
       sem_ver = described_class.from(1)
 
       expect(sem_ver).to have_attributes({major: 1, minor: 0, patch: 0})
@@ -59,7 +59,7 @@ RSpec.describe TTY::Link::SemanticVersion do
       expect(sem_ver).to have_attributes({major: 1, minor: 2, patch: 0})
     end
 
-    it "creates a semantic version from single integer" do
+    it "creates a semantic version from a single integer" do
       sem_ver = described_class[1]
 
       expect(sem_ver).to have_attributes({major: 1, minor: 0, patch: 0})
@@ -67,21 +67,21 @@ RSpec.describe TTY::Link::SemanticVersion do
   end
 
   describe "#<=>" do
-    it "is equal with the same type and version" do
+    it "equals an instance of the same class with an identical version" do
       sem_ver = described_class.from(1, 2, 3)
       same_sem_ver = described_class.from(1, 2, 3)
 
       expect(sem_ver).to eq(same_sem_ver)
     end
 
-    it "isn't equal with the same type and different version" do
+    it "doesn't equal an instance of the same class with a different version" do
       sem_ver = described_class.from(1, 2, 3)
       other_sem_ver = described_class.from(1, 2, 4)
 
       expect(sem_ver).not_to eq(other_sem_ver)
     end
 
-    it "isn't equal with another object" do
+    it "doesn't equal an instance of a different class" do
       sem_ver = described_class.from(1, 2, 3)
       other = [1, 2, 3]
 
@@ -125,13 +125,13 @@ RSpec.describe TTY::Link::SemanticVersion do
   end
 
   describe "#hash" do
-    it "calculates semantic version hash" do
+    it "generates an integer" do
       sem_ver = described_class.from(1, 2, 3)
 
       expect(sem_ver.hash).to be_an(Integer)
     end
 
-    it "calculates the same hash for equal semantic versions" do
+    it "generates the same hash for an equal instance" do
       sem_ver = described_class.from(1, 2, 3)
       same_sem_ver = described_class.from(1, 2, 3)
 
@@ -140,7 +140,7 @@ RSpec.describe TTY::Link::SemanticVersion do
   end
 
   describe "#inspect" do
-    it "converts a semantic version to a string" do
+    it "formats as the release version" do
       sem_ver = described_class.from(1, 2, 3)
 
       expect(sem_ver.inspect).to eq("1.2.3")
