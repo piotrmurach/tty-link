@@ -145,6 +145,14 @@ RSpec.describe TTY::Link::SemanticVersion do
 
       expect(sem_ver.hash).to eq(same_sem_ver.hash)
     end
+
+    it "generates a different hash for an instance of a subclass" do
+      sem_ver = described_class.from(1, 2, 3)
+      stub_const("SubSemanticVersion", Class.new(described_class))
+      sub_sem_ver = SubSemanticVersion.from(1, 2, 3)
+
+      expect(sem_ver.hash).not_to eq(sub_sem_ver.hash)
+    end
   end
 
   describe "#inspect" do
