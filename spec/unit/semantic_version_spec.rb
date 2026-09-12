@@ -74,6 +74,14 @@ RSpec.describe TTY::Link::SemanticVersion do
       expect(sem_ver).to eq(same_sem_ver)
     end
 
+    it "equals an instance of a subclass with an identical version" do
+      sem_ver = described_class.from(1, 2, 3)
+      stub_const("SubSemanticVersion", Class.new(described_class))
+      sub_sem_ver = SubSemanticVersion.from(1, 2, 3)
+
+      expect(sem_ver).to eq(sub_sem_ver)
+    end
+
     it "doesn't equal an instance of the same class with a different version" do
       sem_ver = described_class.from(1, 2, 3)
       other_sem_ver = described_class.from(1, 2, 4)
