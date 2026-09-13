@@ -153,6 +153,27 @@ RSpec.describe TTY::Link::SemanticVersion do
 
       expect(sem_ver.hash).not_to eq(sub_sem_ver.hash)
     end
+
+    it "generates a different hash for an unequal major version" do
+      sem_ver = described_class.from(1, 2, 3)
+      other_sem_ver = described_class.from(0, 2, 3)
+
+      expect(sem_ver.hash).not_to eq(other_sem_ver.hash)
+    end
+
+    it "generates a different hash for an unequal minor version" do
+      sem_ver = described_class.from(1, 2, 3)
+      other_sem_ver = described_class.from(1, 0, 3)
+
+      expect(sem_ver.hash).not_to eq(other_sem_ver.hash)
+    end
+
+    it "generates a different hash for an unequal patch version" do
+      sem_ver = described_class.from(1, 2, 3)
+      other_sem_ver = described_class.from(1, 2, 0)
+
+      expect(sem_ver.hash).not_to eq(other_sem_ver.hash)
+    end
   end
 
   describe "#inspect" do
