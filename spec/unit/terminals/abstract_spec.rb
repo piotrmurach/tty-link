@@ -53,10 +53,6 @@ RSpec.describe TTY::Link::Terminals::Abstract do
         def name?
           false
         end
-
-        def version?
-          true
-        end
       end)
       terminal = Terminal.new(semantic_version, env)
 
