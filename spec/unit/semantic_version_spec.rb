@@ -27,6 +27,12 @@ RSpec.describe TTY::Link::SemanticVersion do
       expect(sem_ver).to have_attributes({major: 1, minor: 2, patch: 3})
     end
 
+    it "creates a semantic version from three integers as strings" do
+      sem_ver = described_class.from("1", "2", "3")
+
+      expect(sem_ver).to have_attributes({major: 1, minor: 2, patch: 3})
+    end
+
     it "creates a semantic version from three integers" do
       sem_ver = described_class.from(1, 2, 3)
 
