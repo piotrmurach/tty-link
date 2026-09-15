@@ -99,6 +99,17 @@ RSpec.describe TTY::Link::Terminals::Abstract do
 
       expect(terminal.version.inspect).to eq("1.2.3")
     end
+
+    it "accesses the semantic version with a separator in a subclass" do
+      stub_const("Terminal", Class.new(described_class) do
+        def version
+          semantic_version("1-2-3", separator: "-")
+        end
+      end)
+      terminal = Terminal.new(semantic_version, env)
+
+      expect(terminal.version.inspect).to eq("1.2.3")
+    end
   end
 
   describe "#term" do
