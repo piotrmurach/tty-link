@@ -174,5 +174,16 @@ RSpec.describe TTY::Link::Terminals::Abstract do
 
       expect(terminal.version).to eq("1.2.3")
     end
+
+    it "accesses the missing term program version env variable in a subclass" do
+      stub_const("Terminal", Class.new(described_class) do
+        def version
+          term_program_version
+        end
+      end)
+      terminal = Terminal.new(semantic_version, {})
+
+      expect(terminal.version).to eq(nil)
+    end
   end
 end
