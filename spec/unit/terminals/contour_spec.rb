@@ -4,6 +4,12 @@ RSpec.describe TTY::Link::Terminals::Contour, "#link?" do
   let(:env_with_name) { {"TERMINAL_NAME" => "contour"} }
   let(:semantic_version) { TTY::Link::SemanticVersion }
 
+  it "doesn't support links without the terminal name environment variable" do
+    contour = described_class.new(semantic_version, {})
+
+    expect(contour.link?).to eq(false)
+  end
+
   it "doesn't support links without a terminal name" do
     env = {"TERMINAL_NAME" => nil}
     contour = described_class.new(semantic_version, env)
