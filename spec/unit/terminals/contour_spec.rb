@@ -71,4 +71,10 @@ RSpec.describe TTY::Link::Terminals::Contour, "#link?" do
 
     expect(contour.link?).to eq(false)
   end
+
+  it "doesn't support links without the terminal version triple env variable" do
+    contour = described_class.new(semantic_version, env_with_name)
+
+    expect(contour.link?).to eq(false)
+  end
 end
