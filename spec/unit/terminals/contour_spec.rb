@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Contour, "#link?" do
     expect(contour.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERMINAL_NAME" => "other-terminal",
+      "TERMINAL_VERSION_TRIPLE" => "1.0.0"
+    }
+    contour = described_class.new(semantic_version, env)
+
+    expect(contour.link?).to eq(false)
+  end
+
   it "supports links above the 1.0.0 version" do
     env = {
       "TERMINAL_NAME" => "Contour",
