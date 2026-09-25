@@ -10,7 +10,7 @@ RSpec.describe TTY::Link::Terminals::Domterm, "#link?" do
   end
 
   it "supports links above the 3.2.0 version" do
-    env = {"DOMTERM" => "QtDomTerm;version=3.4.0;tty=/dev/pts/1"}
+    env = {"DOMTERM" => "QtDomTerm;tty=/dev/pts/1;version=3.4.0"}
     domterm = described_class.new(semantic_version, env)
 
     expect(domterm.link?).to eq(true)
