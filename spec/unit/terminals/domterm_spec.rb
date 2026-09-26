@@ -71,4 +71,14 @@ RSpec.describe TTY::Link::Terminals::Domterm, "#link?" do
 
     expect(domterm.link?).to eq(false)
   end
+
+  it "doesn't compare versions without the domterm version" do
+    env = {"DOMTERM" => "QtDomTerm"}
+    semantic_version_spy = class_spy(semantic_version)
+    domterm = described_class.new(semantic_version_spy, env)
+
+    domterm.link?
+
+    expect(semantic_version_spy).not_to have_received(:from)
+  end
 end
