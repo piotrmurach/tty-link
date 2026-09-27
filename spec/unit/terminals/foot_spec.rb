@@ -3,6 +3,12 @@
 RSpec.describe TTY::Link::Terminals::Foot, "#link?" do
   let(:semantic_version) { TTY::Link::SemanticVersion }
 
+  it "doesn't support links without the term environment variable" do
+    foot = described_class.new(semantic_version, {})
+
+    expect(foot.link?).to eq(false)
+  end
+
   it "supports links on any version" do
     env = {"TERM" => "foot"}
     foot = described_class.new(semantic_version, env)
