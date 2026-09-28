@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Hyper, "#link?" do
     expect(hyper.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "3.0.0"
+    }
+    hyper = described_class.new(semantic_version, env)
+
+    expect(hyper.link?).to eq(false)
+  end
+
   it "supports links above the 3.0.0 version" do
     env = {
       "TERM_PROGRAM" => "hyper",
