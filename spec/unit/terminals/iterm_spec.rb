@@ -14,6 +14,12 @@ RSpec.describe TTY::Link::Terminals::Iterm, "#link?" do
     expect(iterm.link?).to eq(true)
   end
 
+  it "doesn't support links without the term program environment variable" do
+    iterm = described_class.new(semantic_version, {})
+
+    expect(iterm.link?).to eq(false)
+  end
+
   it "doesn't support links without a terminal program name" do
     env = {"TERM_PROGRAM" => nil}
     iterm = described_class.new(semantic_version, env)
