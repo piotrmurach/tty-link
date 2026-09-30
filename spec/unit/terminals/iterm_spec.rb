@@ -34,6 +34,16 @@ RSpec.describe TTY::Link::Terminals::Iterm, "#link?" do
     expect(iterm.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "4.0.0"
+    }
+    iterm = described_class.new(semantic_version, env)
+
+    expect(iterm.link?).to eq(false)
+  end
+
   it "supports links above the 4.3.2 version" do
     env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "4.3.2"})
     iterm = described_class.new(semantic_version, env)
