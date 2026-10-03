@@ -3,6 +3,12 @@
 RSpec.describe TTY::Link::Terminals::Jediterm, "#link?" do
   let(:semantic_version) { TTY::Link::SemanticVersion }
 
+  it "doesn't support links without the terminal emulator env variable" do
+    jediterm = described_class.new(semantic_version, {})
+
+    expect(jediterm.link?).to eq(false)
+  end
+
   it "supports links on any version" do
     env = {"TERMINAL_EMULATOR" => "JetBrains-JediTerm"}
     jediterm = described_class.new(semantic_version, env)
