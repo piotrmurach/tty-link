@@ -39,8 +39,8 @@ RSpec.describe TTY::Link::Terminals::Konsole, "#link?" do
   end
 
   it "doesn't support links without the Konsole version environment variable" do
-    domterm = described_class.new(semantic_version, {})
+    konsole = described_class.new(semantic_version, {})
 
-    expect(domterm.link?).to eq(false)
+    expect(konsole.link?).to eq(false)
   end
 end
