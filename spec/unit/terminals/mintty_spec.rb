@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Mintty, "#link?" do
     expect(mintty.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "3.0.0"
+    }
+    mintty = described_class.new(semantic_version, env)
+
+    expect(mintty.link?).to eq(false)
+  end
+
   it "supports links above the 3.7.4 version" do
     env = {
       "TERM_PROGRAM" => "MinTTY",
