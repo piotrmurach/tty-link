@@ -43,4 +43,13 @@ RSpec.describe TTY::Link::Terminals::Konsole, "#link?" do
 
     expect(konsole.link?).to eq(false)
   end
+
+  it "doesn't compare versions without the Konsole version" do
+    semantic_version_spy = class_spy(semantic_version)
+    konsole = described_class.new(semantic_version_spy, {})
+
+    konsole.link?
+
+    expect(semantic_version_spy).not_to have_received(:from)
+  end
 end
