@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Rio, "#link?" do
     expect(rio.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "1.0.0"
+    }
+    rio = described_class.new(semantic_version, env)
+
+    expect(rio.link?).to eq(false)
+  end
+
   it "supports links above the 0.1.8 version" do
     env = {
       "TERM_PROGRAM" => "Rio",
