@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Terminology, "#link?" do
     expect(terminology.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "2.0.0"
+    }
+    terminology = described_class.new(semantic_version, env)
+
+    expect(terminology.link?).to eq(false)
+  end
+
   it "supports links above the 1.13.0 version" do
     env = {
       "TERM_PROGRAM" => "Terminology",
