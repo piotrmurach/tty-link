@@ -77,4 +77,13 @@ RSpec.describe TTY::Link::Terminals::Terminology, "#link?" do
 
     expect(terminology.link?).to eq(false)
   end
+
+  it "doesn't compare versions without the term program version" do
+    semantic_version_spy = class_spy(semantic_version)
+    terminology = described_class.new(semantic_version_spy, env_with_name)
+
+    terminology.link?
+
+    expect(semantic_version_spy).not_to have_received(:from)
+  end
 end
