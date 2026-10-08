@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Vscode, "#link?" do
     expect(vscode.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "2.0.0"
+    }
+    vscode = described_class.new(semantic_version, env)
+
+    expect(vscode.link?).to eq(false)
+  end
+
   it "supports links above the 1.92.2 version" do
     env = {
       "TERM_PROGRAM" => "VSCode",
