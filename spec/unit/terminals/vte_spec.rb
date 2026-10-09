@@ -50,4 +50,13 @@ RSpec.describe TTY::Link::Terminals::Vte do
 
     expect(vte.link?).to eq(false)
   end
+
+  it "doesn't compare versions without the VTE version" do
+    semantic_version_spy = class_spy(semantic_version)
+    vte = described_class.new(semantic_version_spy, {})
+
+    vte.link?
+
+    expect(semantic_version_spy).not_to have_received(:from)
+  end
 end
