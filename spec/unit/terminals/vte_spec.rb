@@ -44,4 +44,10 @@ RSpec.describe TTY::Link::Terminals::Vte do
 
     expect(vte.link?).to eq(false)
   end
+
+  it "doesn't support links without the VTE version environment variable" do
+    vte = described_class.new(semantic_version, {})
+
+    expect(vte.link?).to eq(false)
+  end
 end
