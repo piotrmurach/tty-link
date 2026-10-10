@@ -24,6 +24,16 @@ RSpec.describe TTY::Link::Terminals::Wezterm, "#link?" do
     expect(wezterm.link?).to eq(false)
   end
 
+  it "doesn't support links with a different name and a compatible version" do
+    env = {
+      "TERM_PROGRAM" => "other-terminal",
+      "TERM_PROGRAM_VERSION" => "20190101-000000-a1b2c3d4"
+    }
+    wezterm = described_class.new(semantic_version, env)
+
+    expect(wezterm.link?).to eq(false)
+  end
+
   it "supports links above the 20240203 version" do
     env = {
       "TERM_PROGRAM" => "wezterm",
