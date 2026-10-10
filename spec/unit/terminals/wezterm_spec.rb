@@ -83,4 +83,13 @@ RSpec.describe TTY::Link::Terminals::Wezterm, "#link?" do
 
     expect(wezterm.link?).to eq(false)
   end
+
+  it "doesn't compare versions without the term program version" do
+    semantic_version_spy = class_spy(semantic_version)
+    wezterm = described_class.new(semantic_version_spy, env_with_name)
+
+    wezterm.link?
+
+    expect(semantic_version_spy).not_to have_received(:from)
+  end
 end
