@@ -27,7 +27,7 @@ RSpec.describe TTY::Link::Terminals::Wezterm, "#link?" do
   it "supports links above the 20240203 version" do
     env = {
       "TERM_PROGRAM" => "wezterm",
-      "TERM_PROGRAM_VERSION" => "20250403"
+      "TERM_PROGRAM_VERSION" => "20250403-000000-a1b2c3d4"
     }
     wezterm = described_class.new(semantic_version, env)
 
@@ -35,21 +35,27 @@ RSpec.describe TTY::Link::Terminals::Wezterm, "#link?" do
   end
 
   it "supports links above the 20180218 version" do
-    env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "20180219-123-abc"})
+    env = env_with_name.merge({
+      "TERM_PROGRAM_VERSION" => "20180219-000000-a1b2c3d4"
+    })
     wezterm = described_class.new(semantic_version, env)
 
     expect(wezterm.link?).to eq(true)
   end
 
   it "supports links on the 20180218 version" do
-    env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "20180218-123-abc"})
+    env = env_with_name.merge({
+      "TERM_PROGRAM_VERSION" => "20180218-000000-a1b2c3d4"
+    })
     wezterm = described_class.new(semantic_version, env)
 
     expect(wezterm.link?).to eq(true)
   end
 
   it "doesn't support links below the 20180218 version" do
-    env = env_with_name.merge({"TERM_PROGRAM_VERSION" => "20180217-123-abc"})
+    env = env_with_name.merge({
+      "TERM_PROGRAM_VERSION" => "20180217-000000-a1b2c3d4"
+    })
     wezterm = described_class.new(semantic_version, env)
 
     expect(wezterm.link?).to eq(false)
