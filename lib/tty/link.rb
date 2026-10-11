@@ -151,6 +151,21 @@ module TTY
       @plain = plain
     end
 
+    # Detect terminal hyperlink support
+    #
+    # @example
+    #   link.link?
+    #   # => true
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def link?
+      return false unless tty?
+
+      terminals.any?(&:link?)
+    end
+
     # Generate terminal hyperlink
     #
     # @example
@@ -185,21 +200,6 @@ module TTY
       else
         plain_link(name, url).to_s
       end
-    end
-
-    # Detect terminal hyperlink support
-    #
-    # @example
-    #   link.link?
-    #   # => true
-    #
-    # @return [Boolean]
-    #
-    # @api public
-    def link?
-      return false unless tty?
-
-      terminals.any?(&:link?)
     end
 
     private
