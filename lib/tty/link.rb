@@ -34,6 +34,34 @@ module TTY
     HYPERLINK_ENV = "TTY_LINK_HYPERLINK"
     private_constant :HYPERLINK_ENV
 
+    # Detect terminal hyperlink support
+    #
+    # @example
+    #   TTY::Link.link?
+    #   # => true
+    #
+    # @example
+    #   TTY::Link.link?(env: {"VTE_VERSION" => "7603"})
+    #   # => true
+    #
+    # @example
+    #   TTY::Link.link?(output: $stderr)
+    #   # => false
+    #
+    # @param [ENV, Hash{String => String}] env
+    #   the environment variables
+    # @param [IO] output
+    #   the output stream, defaults to $stdout
+    #
+    # @return [Boolean]
+    #
+    # @see #link?
+    #
+    # @api public
+    def self.link?(env: ENV, output: $stdout)
+      new(env: env, output: output).link?
+    end
+
     # Generate terminal hyperlink
     #
     # @example
@@ -86,34 +114,6 @@ module TTY
                      output: $stdout, plain: DEFAULT_TEMPLATE)
       new(env: env, hyperlink: hyperlink, output: output, plain: plain)
         .link_to(name, url, attrs: attrs)
-    end
-
-    # Detect terminal hyperlink support
-    #
-    # @example
-    #   TTY::Link.link?
-    #   # => true
-    #
-    # @example
-    #   TTY::Link.link?(env: {"VTE_VERSION" => "7603"})
-    #   # => true
-    #
-    # @example
-    #   TTY::Link.link?(output: $stderr)
-    #   # => false
-    #
-    # @param [ENV, Hash{String => String}] env
-    #   the environment variables
-    # @param [IO] output
-    #   the output stream, defaults to $stdout
-    #
-    # @return [Boolean]
-    #
-    # @see #link?
-    #
-    # @api public
-    def self.link?(env: ENV, output: $stdout)
-      new(env: env, output: output).link?
     end
 
     # Create a {TTY::Link} instance
