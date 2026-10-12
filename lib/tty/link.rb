@@ -150,8 +150,12 @@ module TTY
     #   the plain hyperlink template
     #
     # @api public
-    def initialize(env: ENV, hyperlink: :auto, output: $stdout,
-                   plain: DEFAULT_TEMPLATE)
+    def initialize(
+      env: ENV,
+      hyperlink: :auto,
+      output: $stdout,
+      plain: DEFAULT_TEMPLATE
+    )
       @env = env
       @hyperlink_parameter = hyperlink_parameter(hyperlink_env || hyperlink)
       @output = output
