@@ -110,8 +110,15 @@ module TTY
     # @see #link_to
     #
     # @api public
-    def self.link_to(name, url = nil, attrs: {}, env: ENV, hyperlink: :auto,
-                     output: $stdout, plain: DEFAULT_TEMPLATE)
+    def self.link_to(
+      name,
+      url = nil,
+      attrs: {},
+      env: ENV,
+      hyperlink: :auto,
+      output: $stdout,
+      plain: DEFAULT_TEMPLATE
+    )
       new(env: env, hyperlink: hyperlink, output: output, plain: plain)
         .link_to(name, url, attrs: attrs)
     end
