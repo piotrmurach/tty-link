@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
+require_relative "error"
+
 module TTY
   class Link
-    # Raised to signal an error condition
-    #
-    # @api public
-    class Error < StandardError
-    end # Error
-
     # Raised when a class does not implement an abstract method
     #
     # @api public
