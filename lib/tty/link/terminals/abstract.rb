@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../errors"
+require_relative "../abstract_method_error"
 
 module TTY
   class Link
