@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "value_error"
+
 module TTY
   class Link
     # Responsible for representing hyperlink parameter value
