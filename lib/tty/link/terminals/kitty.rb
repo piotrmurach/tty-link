@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "abstract"
+
 module TTY
   class Link
     module Terminals
