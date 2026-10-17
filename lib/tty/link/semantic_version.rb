@@ -168,7 +168,7 @@ module TTY
       #
       # @api public
       def <=>(other)
-        return unless other.is_a?(self.class)
+        return unless other.instance_of?(self.class)
 
         major_comparison = @major <=> other.major
         return major_comparison unless major_comparison.zero?
