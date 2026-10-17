@@ -38,9 +38,6 @@ module TTY
       #   TTY::Link::SemanticVersion.from(1, 2, 3)
       #
       # @example
-      #   TTY::Link::SemanticVersion[1, 2, 3]
-      #
-      # @example
       #   TTY::Link::SemanticVersion.from("1234")
       #
       # @example
@@ -66,7 +63,6 @@ module TTY
           end
         new(major.to_i, minor.to_i, patch.to_i)
       end
-      singleton_class.send(:alias_method, :[], :from)
 
       # Convert a string version to an array version
       #

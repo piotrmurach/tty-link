@@ -52,26 +52,6 @@ RSpec.describe TTY::Link::SemanticVersion do
     end
   end
 
-  describe ".[]" do
-    it "creates a semantic version from three integers" do
-      sem_ver = described_class[1, 2, 3]
-
-      expect(sem_ver).to have_attributes({major: 1, minor: 2, patch: 3})
-    end
-
-    it "creates a semantic version from two integers" do
-      sem_ver = described_class[1, 2]
-
-      expect(sem_ver).to have_attributes({major: 1, minor: 2, patch: 0})
-    end
-
-    it "creates a semantic version from a single integer" do
-      sem_ver = described_class[1]
-
-      expect(sem_ver).to have_attributes({major: 1, minor: 0, patch: 0})
-    end
-  end
-
   describe "#<=>" do
     it "equals an instance of the same class with an identical version" do
       sem_ver = described_class.from(1, 2, 3)
