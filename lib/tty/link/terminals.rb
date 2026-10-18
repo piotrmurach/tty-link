@@ -6,21 +6,31 @@ module TTY
     #
     # @api private
     module Terminals
-      # The directory name for terminals
+      # The terminal names
       #
-      # @return [String]
-      #
-      # @api private
-      DIR_NAME = "terminals"
-      private_constant :DIR_NAME
-
-      # The Ruby file pattern
-      #
-      # @return [String]
+      # @return [Array<String>]
       #
       # @api private
-      RUBY_FILE = "*.rb"
-      private_constant :RUBY_FILE
+      NAMES = %w[
+        alacritty
+        contour
+        domterm
+        foot
+        hyper
+        iterm
+        jediterm
+        kitty
+        konsole
+        mintty
+        rio
+        tabby
+        terminology
+        vscode
+        vte
+        wezterm
+        wt
+      ].freeze
+      private_constant :NAMES
 
       # The registered terminal classes
       #
@@ -49,23 +59,22 @@ module TTY
         registered << terminal_class
       end
 
-      # Require all terminal files from the terminals directory
+      # Require all terminal files
       #
       # @example
-      #   TTY::Link::Terminals.require_terminals
+      #   TTY::Link::Terminals.require_all
       #
       # @return [void]
       #
       # @api private
-      def self.require_terminals
-        terminals_dir = ::File.join(__dir__, DIR_NAME, RUBY_FILE)
-        ::Dir.glob(terminals_dir).sort.each do |terminal_path|
-          require_relative ::File.join(DIR_NAME, ::File.basename(terminal_path))
+      def self.require_all
+        NAMES.each do |name|
+          require_relative "terminals/#{name}"
         end
       end
-      private_class_method :require_terminals
+      private_class_method :require_all
 
-      require_terminals
+      require_all
     end # Terminals
   end # Link
 end # TTY
