@@ -1,5 +1,12 @@
 # Change log
 
+## [Unreleased]
+
+### Changed
+
+* Change the `TTY::Link::Terminals` module to require the terminal files
+  for the hyperlink support detection directly.
+
 ## [v0.2.0] - 2024-11-03
 
 ### Added
@@ -43,6 +50,7 @@
 
 * Add the initial implementation.
 
+[unreleased]: https://github.com/piotrmurach/tty-link/compare/v0.2.0...HEAD
 [v0.2.0]: https://github.com/piotrmurach/tty-link/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/piotrmurach/tty-link/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/piotrmurach/tty-link/compare/v0.1.0
