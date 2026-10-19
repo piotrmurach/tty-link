@@ -70,6 +70,7 @@ module TTY
       def self.require_all
         NAMES.each do |name|
           require_relative "terminals/#{name}"
+          register(const_get(name.capitalize))
         end
       end
       private_class_method :require_all
