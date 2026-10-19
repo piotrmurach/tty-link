@@ -37,20 +37,6 @@ module TTY
         TERM_PROGRAM_VERSION = "TERM_PROGRAM_VERSION"
         private_constant :TERM_PROGRAM_VERSION
 
-        # Register a terminal class with terminals
-        #
-        # @param [TTY::Link::Terminal::Abstract] terminal_class
-        #   the terminal class to register
-        #
-        # @return [void]
-        #
-        # @api private
-        def self.inherited(terminal_class)
-          super
-          Terminals.register(terminal_class)
-        end
-        private_class_method :inherited
-
         # Create a {TTY::Link::Terminals::Abstract} instance
         #
         # @example
