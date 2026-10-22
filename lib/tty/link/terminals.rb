@@ -32,6 +32,23 @@ module TTY
       ].freeze
       private_constant :NAMES
 
+      # List the terminal classes
+      #
+      # @example
+      #   TTY::Link::Terminals.list { |terminal_class| ... }
+      #
+      # @yieldparam [Class<TTY::Link::Terminals::Abstract>] terminal_class
+      #   the terminal class
+      #
+      # @return [Array]
+      #
+      # @api public
+      def self.list
+        NAMES.map do |name|
+          yield const_get(name.capitalize)
+        end
+      end
+
       # The registered terminal classes
       #
       # @example
