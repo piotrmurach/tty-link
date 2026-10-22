@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Added
+
+* Add the ability to list the terminal classes for the hyperlink support
+  detection to the `TTY::Link::Terminals` module.
+
 ### Changed
 
 * Change the `TTY::Link::Terminals` module to require the terminal files
