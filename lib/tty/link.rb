@@ -308,9 +308,10 @@ module TTY
     #
     # @api private
     def terminals
-      @terminals ||= Terminals.registered.map do |terminal_class|
-        terminal_class.new(SemanticVersion, @env)
-      end
+      @terminals ||=
+        Terminals.list do |terminal_class|
+          terminal_class.new(SemanticVersion, @env)
+        end
     end
 
     # Detect whether the output is a terminal

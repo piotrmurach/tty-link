@@ -62,12 +62,12 @@ RSpec.describe TTY::Link, "#link_to" do
         expect { link.link_to(name, url) }.to perform_at_least(800_000).ips
       end
 
-      it "allocates 31 objects" do
+      it "allocates 48 objects" do
         name = "TTY Toolkit"
         url = "https://ttytoolkit.org"
         link = described_class.new(env: env_with_alacritty)
 
-        expect { link.link_to(name, url) }.to perform_allocation(31).objects
+        expect { link.link_to(name, url) }.to perform_allocation(48).objects
       end
     end
 
@@ -93,12 +93,12 @@ RSpec.describe TTY::Link, "#link_to" do
         expect { link.link_to(name, url) }.to perform_at_least(320_000).ips
       end
 
-      it "allocates 49 objects" do
+      it "allocates 66 objects" do
         name = "TTY Toolkit"
         url = "https://ttytoolkit.org"
         link = described_class.new(env: {})
 
-        expect { link.link_to(name, url) }.to perform_allocation(49).objects
+        expect { link.link_to(name, url) }.to perform_allocation(66).objects
       end
     end
   end

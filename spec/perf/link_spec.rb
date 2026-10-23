@@ -24,10 +24,10 @@ RSpec.describe TTY::Link, "#link?" do
       expect { link.link? }.to perform_at_least(1_600_000).ips
     end
 
-    it "allocates 21 objects" do
+    it "allocates 38 objects" do
       link = described_class.new(env: env_with_alacritty)
 
-      expect { link.link? }.to perform_allocation(21).objects
+      expect { link.link? }.to perform_allocation(38).objects
     end
   end
 
@@ -48,10 +48,10 @@ RSpec.describe TTY::Link, "#link?" do
       expect { link.link? }.to perform_at_least(470_000).ips
     end
 
-    it "allocates 39 objects" do
+    it "allocates 56 objects" do
       link = described_class.new(env: {})
 
-      expect { link.link? }.to perform_allocation(39).objects
+      expect { link.link? }.to perform_allocation(56).objects
     end
   end
 end
