@@ -12,6 +12,10 @@
 * Change the `TTY::Link::Terminals` module to require the terminal files
   for the hyperlink support detection directly.
 
+### Removed
+
+* Remove the terminal class registration from the `TTY::Link::Terminals` module.
+
 ## [v0.2.0] - 2024-11-03
 
 ### Added
