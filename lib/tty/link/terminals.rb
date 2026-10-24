@@ -49,33 +49,6 @@ module TTY
         end
       end
 
-      # The registered terminal classes
-      #
-      # @example
-      #   TTY::Link::Terminals.registered
-      #
-      # @return [Array<TTY::Link::Terminals::Abstract>]
-      #
-      # @api private
-      def self.registered
-        @registered ||= []
-      end
-
-      # Register a terminal class
-      #
-      # @example
-      #   TTY::Link::Terminals.register(TTY::Link::Terminals::Iterm)
-      #
-      # @param [TTY::Link::Terminals::Abstract] terminal_class
-      #   the terminal class to register
-      #
-      # @return [void]
-      #
-      # @api private
-      def self.register(terminal_class)
-        registered << terminal_class
-      end
-
       # Require all terminal files
       #
       # @example
@@ -87,7 +60,6 @@ module TTY
       def self.require_all
         NAMES.each do |name|
           require_relative "terminals/#{name}"
-          register(const_get(name.capitalize))
         end
       end
       private_class_method :require_all
