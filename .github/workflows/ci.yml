@@ -19,6 +19,21 @@ on:
 permissions:
   contents: read
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      - name: Run the linter
+        run: bundle exec rake lint
   tests:
     name: Ruby ${{ matrix.ruby }}${{ matrix.coverage && ' + coverage' || '' }}
     runs-on: ${{ matrix.os || 'ubuntu-latest' }}
