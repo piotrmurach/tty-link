@@ -8,6 +8,22 @@ namespace :yard do
     measurements = Yardstick::CLI.run("lib/**/*.rb")
     abort if measurements.failed.nonzero?
   end
+
+  desc "Generate documentation"
+  task :doc do
+    abort if yard_missing?
+
+    YARD::CLI::Yardoc.run(
+      "--fail-on-warning",
+      "--no-private",
+      "--no-stats",
+      "lib/**/*.rb"
+    )
+  end
+end
+
+def yard_missing?
+  require_or_inform("yard").nil?
 end
 
 def yardstick_missing?
