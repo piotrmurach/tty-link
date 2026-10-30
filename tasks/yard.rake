@@ -20,6 +20,20 @@ namespace :yard do
       "lib/**/*.rb"
     )
   end
+
+  desc "Report documentation statistics"
+  task :stat do
+    abort if yard_missing?
+
+    YARD::CLI::Stats.run(
+      "--compact",
+      "--fail-on-warning",
+      "--list-undoc",
+      "--private",
+      "--protected",
+      "lib/**/*.rb"
+    )
+  end
 end
 
 def yard_missing?
