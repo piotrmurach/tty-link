@@ -25,6 +25,7 @@ Layout/SpaceInsideHashLiteralBraces:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+    - "tasks/**/*"
     - "**/*.gemspec"
 
 Metrics/ModuleLength:
